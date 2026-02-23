@@ -1,13 +1,13 @@
 from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserCreationForm 
-from .models import Customer
+from .models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries
 
-class CustomerCreationForm(UserCreationForm):
+class AccountCreationForm(UserCreationForm):
     terms_accepted = forms.BooleanField(label='Terms and Conditions', required=True)
 
     class Meta(UserCreationForm.Meta):
-        model = Customer
+        model = Account
         fields = UserCreationForm.Meta.fields + ('email','terms_accepted')
 
 
@@ -26,7 +26,7 @@ class LoginForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control','placeholder':'İstifadəçi adı və ya E-mail'})
+        self.fields['username'].widget.attrs.update({'class': 'form-control','placeholder':'İstifadəçi adı'})
         self.fields['password'].widget.attrs.update({'class': 'form-control','placeholder':'Şifrə'})
         
         
