@@ -1,0 +1,24 @@
+HTTrack3.49-2+htsswf+htsjava launched on Sat, 21 Feb 2026 18:05:24 at https://coderthemes.com/zircos/layouts/dashboard-real-estate.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://coderthemes.com/zircos/layouts/dashboard-real-estate.html -O1 "C:\Users\VICTUS\Desktop\zircos\zircos" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/assets/images/dr-profile/dr-bg.jpg (from https://coderthemes.com/zircos/layouts/assets/css/app.min.css)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/assets/images/banner-1.jpg (from https://coderthemes.com/zircos/layouts/assets/css/app.min.css)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/assets/images/animat-search-color.gif (from https://coderthemes.com/zircos/layouts/error-400.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/apps-email.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/apps-file-manager.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/auth-2fa.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/auth-account-deactivation.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/error-408.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/error-501.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/error-502.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/ui-ribbons.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/.tables-datatable.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+18:07:06	Error: 	"Not Found" (404) at link https://coderthemes.com/zircos/layouts/icons-solar.html (from https://coderthemes.com/zircos/layouts/layouts-horizontal.html)
+
+HTTrack Website Copier/3.49-2 mirror complete in 1 minutes 43 seconds : 289 links scanned, 275 files written (26916592 bytes overall) [11294358 bytes received at 109653 bytes/sec], 18120172 bytes transferred using HTTP compression in 214 files, ratio 13%, 16.0 requests per connection
+(13 errors, 0 warnings, 0 messages)

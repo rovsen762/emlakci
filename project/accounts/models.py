@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from utils.photo_save import logo_dir_path
-from properties.models import Location, Category
 
 class Plan(models.Model):
     name = models.CharField(max_length=255, verbose_name="Plan Name")
@@ -39,7 +38,7 @@ class Account(AbstractUser):
     is_reset_password_otp_verified = models.BooleanField(default=False, verbose_name="'Forgot Password' OTP Verified?")
     reset_password_request_count = models.IntegerField(default=0, verbose_name="Number of password reset requests in a day")
     last_reset_password_request_date = models.DateField(null=True, blank=True, verbose_name="Last password reset request date")
-    last_password__reset_date = models.DateField(null=True, blank=True, verbose_name="Last password reset date")
+    last_password_reset_date = models.DateField(null=True, blank=True, verbose_name="Last password reset date")
     reset_password_otp_created_at = models.DateTimeField(null=True, blank=True, verbose_name="Password Reset OTP creation time")
     reset_password_otp_expires_at = models.DateTimeField(null=True, blank=True, verbose_name="Password Reset OTP expiration time")    
 
@@ -69,6 +68,9 @@ class AccountCustomers(models.Model):
         verbose_name = "Account Customer"
         verbose_name_plural = "Account Customers"
         
+    def __str__(self):
+        return f"{self.account.username} - {self.name}"
+        
         
 class AccountCustomerPreferries(models.Model):
     
@@ -93,8 +95,8 @@ class AccountCustomerPreferries(models.Model):
     have_things = models.BooleanField(default=False, verbose_name="Have things?")
     communal = models.BooleanField(default=False, verbose_name="Communal?")
     floor = models.IntegerField(null=True, blank=True, verbose_name="Floor")
-    location = models.ManyToManyField(Location,related_name="customer_preferries", verbose_name="Preferred Location")
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="customer_preferries", verbose_name="Preferred Category")
+    location = models.ManyToManyField("properties.Location", blank=True,related_name="customer_preferries", verbose_name="Preferred Location")
+    category = models.ForeignKey("properties.Category", on_delete=models.SET_NULL, null=True, blank=True, related_name="customer_preferries", verbose_name="Preferred Category")
     
     
     class Meta:
@@ -119,9 +121,10 @@ class PreferryPriority(models.Model):
     
 class AccountFilters(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="filters")
+    account_customer = models.ForeignKey(AccountCustomers, on_delete=models.CASCADE, related_name="filters", null=True, blank=True)
     name = models.CharField(max_length=255, verbose_name="Filter Name")
-    location = models.ManyToManyField(Location, related_name="account_filters", verbose_name="Filter Location")
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="account_filters", verbose_name="Filter Category")
+    location = models.ManyToManyField("properties.Location", related_name="account_filters", verbose_name="Filter Location")
+    category = models.ForeignKey("properties.Category", on_delete=models.SET_NULL, null=True, blank=True, related_name="account_filters", verbose_name="Filter Category")
     min_price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, verbose_name="Minimum Price")
     max_price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, verbose_name="Maximum Price")
     min_area = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Minimum Area")
@@ -140,6 +143,15 @@ class AccountFilters(models.Model):
     
     
     
+class AccountFilterMatch(models.Model):
+    account_filter = models.ForeignKey(AccountFilters, on_delete=models.CASCADE, related_name="matches")
+    property = models.ForeignKey("properties.Property", on_delete=models.CASCADE, related_name="filter_matches")
+    matched_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Account Filter Match"
+        verbose_name_plural = "Account Filter Matches"
+    
 class Subscription(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True)
@@ -151,3 +163,6 @@ class Subscription(models.Model):
     class Meta:
         verbose_name = "Subscription"
         verbose_name_plural = "Subscriptions"
+        
+        
+        

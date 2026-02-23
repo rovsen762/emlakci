@@ -1,5 +1,4 @@
 from django.db import models
-from accounts.models import Account
 
 # Create your models here.
 
@@ -108,7 +107,6 @@ class Property(models.Model):
     location_area = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Property Area")
     
     source = models.ForeignKey(PropertySource, on_delete=models.CASCADE)
-    source_id = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     
@@ -131,7 +129,7 @@ class Property(models.Model):
         
         
 class Notification(models.Model):
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    account = models.ForeignKey("accounts.Account",on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     is_sent = models.BooleanField(default=False)
     sent_at = models.DateTimeField(null=True, blank=True)
@@ -140,6 +138,7 @@ class Notification(models.Model):
     retry_count = models.IntegerField(default=0)
     error_message = models.TextField(null=True, blank=True)
     score = models.IntegerField(default=0)
+    also_sendto_customer = models.BooleanField(default=False)
     
     def __str__(self):
         return f"Notification for {self.account.email} - Property: {self.property.title}"
