@@ -1,3 +1,7 @@
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
+from .models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries
 # Create your views here.
+
+
+

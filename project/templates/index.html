@@ -1,144 +1,555 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+{% extends 'partials/_base.html' %}
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="HTTrack is an easy-to-use website mirror utility. It allows you to download a World Wide website from the Internet to a local directory,building recursively all structures, getting html, images, and other files from the server to your computer. Links are rebuiltrelatively so that you can freely browse to the local site (works with any browser). You can mirror several sites together so that you can jump from one toanother. You can, also, update an existing mirror site, or resume an interrupted download. The robot is fully configurable, with an integrated help" />
-	<meta name="keywords" content="httrack, HTTRACK, HTTrack, winhttrack, WINHTTRACK, WinHTTrack, offline browser, web mirror utility, aspirateur web, surf offline, web capture, www mirror utility, browse offline, local  site builder, website mirroring, aspirateur www, internet grabber, capture de site web, internet tool, hors connexion, unix, dos, windows 95, windows 98, solaris, ibm580, AIX 4.0, HTS, HTGet, web aspirator, web aspirateur, libre, GPL, GNU, free software" />
-	<title>Local index - HTTrack Website Copier</title>
-  <!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
-	<style type="text/css">
-	<!--
-
-body {
-	margin: 0;  padding: 0;  margin-bottom: 15px;  margin-top: 8px;
-	background: #77b;
-}
-body, td {
-	font: 14px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-	}
-
-#subTitle {
-	background: #000;  color: #fff;  padding: 4px;  font-weight: bold; 
-	}
-
-#siteNavigation a, #siteNavigation .current {
-	font-weight: bold;  color: #448;
-	}
-#siteNavigation a:link    { text-decoration: none; }
-#siteNavigation a:visited { text-decoration: none; }
-
-#siteNavigation .current { background-color: #ccd; }
-
-#siteNavigation a:hover   { text-decoration: none;  background-color: #fff;  color: #000; }
-#siteNavigation a:active  { text-decoration: none;  background-color: #ccc; }
+{% load static %}
 
 
-a:link    { text-decoration: underline;  color: #00f; }
-a:visited { text-decoration: underline;  color: #000; }
-a:hover   { text-decoration: underline;  color: #c00; }
-a:active  { text-decoration: underline; }
-
-#pageContent {
-	clear: both;
-	border-bottom: 6px solid #000;
-	padding: 10px;  padding-top: 20px;
-	line-height: 1.65em;
-	background-image: url(backblue.gif);
-	background-repeat: no-repeat;
-	background-position: top right;
-	}
-
-#pageContent, #siteNavigation {
-	background-color: #ccd;
-	}
+{% block content %} 
+ 
 
 
-.imgLeft  { float: left;   margin-right: 10px;  margin-bottom: 10px; }
-.imgRight { float: right;  margin-left: 10px;   margin-bottom: 10px; }
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+<div class="page-content">
+	<div class="page-container">
 
-hr { height: 1px;  color: #000;  background-color: #000;  margin-bottom: 15px; }
+		
+		<div class="page-title-head d-flex align-items-center gap-2">
+			<div class="flex-grow-1">
+				<h4 class="fs-17 mb-0">Real Estate</h4>
+			</div>
 
-h1 { margin: 0;  font-weight: bold;  font-size: 2em; }
-h2 { margin: 0;  font-weight: bold;  font-size: 1.6em; }
-h3 { margin: 0;  font-weight: bold;  font-size: 1.3em; }
-h4 { margin: 0;  font-weight: bold;  font-size: 1.18em; }
+			<div class="text-end">
+				<ol class="breadcrumb m-0 py-0 fs-13">
+					<li class="breadcrumb-item"><a href="javascript: void(0);">Zircos</a></li>
+					
+					<li class="breadcrumb-item active">Real Estate</li>
+				</ol>
+			</div>
+		</div>
+		
 
-.blak { background-color: #000; }
-.hide { display: none; }
-.tableWidth { min-width: 400px; }
+		
 
-.tblRegular       { border-collapse: collapse; }
-.tblRegular td    { padding: 6px;  background-image: url(fade.gif);  border: 2px solid #99c; }
-.tblHeaderColor, .tblHeaderColor td { background: #99c; }
-.tblNoBorder td   { border: 0; }
+		<div class="row row-cols-xxl-5 row-cols-md-3 row-cols-1 align-items-center">
 
+			<!-- Total Listings -->
+			<div class="col">
+				<div class="card">
+					<div class="card-body border-start rounded border-3 border-primary">
+						
+						<h5 class="text-muted fs-13 text-uppercase" title="Total Listings">Total Listings</h5>
+						<div class="d-flex align-items-center gap-2 my-3">
+							<div class="avatar-md flex-shrink-0">
+								<span class="avatar-title bg-primary-subtle text-primary rounded fs-22">
+									<i class="ti ti-building"></i>
+								</span>
+							</div>
+							<h3 class="mb-0 fw-bold">1,245</h3>
+						</div>
+						<p class="mb-1">
+							<span class="text-primary me-1"><i class="ti ti-point-filled"></i></span>
+							<span class="text-nowrap text-muted">Residential</span>
+							<span class="float-end"><b>850</b></span>
+						</p>
+						<p class="mb-0">
+							<span class="text-primary me-1"><i class="ti ti-point-filled"></i></span>
+							<span class="text-nowrap text-muted">Commercial</span>
+							<span class="float-end"><b>395</b></span>
+						</p>
+					</div>
+				</div>
+			</div><!-- end col -->
+		
+			<!-- New Properties -->
+			<div class="col">
+				<div class="card">
+					<div class="card-body border-start rounded border-3 border-success">
+						
+						<h5 class="text-muted fs-13 text-uppercase" title="New Properties">New Properties</h5>
+						<div class="d-flex align-items-center gap-2 my-3">
+							<div class="avatar-md flex-shrink-0">
+								<span class="avatar-title bg-success-subtle text-success rounded fs-22">
+									<i class="ti ti-home-plus"></i>
+								</span>
+							</div>
+							<h3 class="mb-0 fw-bold">67 <span class="badge text-bg-success fw-medium ms-2 fs-12">This Week</span></h3>
+						</div>
+						<p class="mb-1">
+							<span class="text-primary me-1"><i class="ti ti-minus"></i></span>
+							<span class="text-nowrap text-muted">Apartments</span>
+							<span class="float-end"><b>42</b></span>
+						</p>
+						<p class="mb-0">
+							<span class="text-primary me-1"><i class="ti ti-minus"></i></span>
+							<span class="text-nowrap text-muted">Houses</span>
+							<span class="float-end"><b>25</b></span>
+						</p>
+					</div>
+				</div>
+			</div><!-- end col -->
+		
+			<!-- Total Agents -->
+			<div class="col">
+				<div class="card">
+					<div class="card-body border-start rounded border-3 border-warning">
+						
+						<h5 class="text-muted fs-13 text-uppercase" title="Total Agents">Total Agents</h5>
+						<div class="d-flex align-items-center gap-2 my-3">
+							<div class="avatar-md flex-shrink-0">
+								<span class="avatar-title bg-warning-subtle text-warning rounded fs-22">
+									<i class="ti ti-user-circle"></i>
+								</span>
+							</div>
+							<h3 class="mb-0 fw-bold">289</h3>
+						</div>
+						<p class="mb-1">
+							<span class="text-primary me-1"><i class="ti ti-minus"></i></span>
+							<span class="text-nowrap text-muted">Active Agents</span>
+							<span class="float-end"><b>265</b></span>
+						</p>
+						<p class="mb-0">
+							<span class="text-primary me-1"><i class="ti ti-minus"></i></span>
+							<span class="text-nowrap text-muted">On Leave</span>
+							<span class="float-end"><b>24</b></span>
+						</p>
+					</div>
+				</div>
+			</div><!-- end col -->
+		
+			<!-- Available Apartments -->
+			<div class="col">
+				<div class="card">
+					<div class="card-body border-start rounded border-3 border-danger">
+						
+						<h5 class="text-muted fs-13 text-uppercase" title="Available Apartments">Available Apartments</h5>
+						<div class="d-flex align-items-center gap-2 my-3">
+							<div class="avatar-md flex-shrink-0">
+								<span class="avatar-title bg-danger-subtle text-danger rounded fs-22">
+									<i class="ti ti-building-skyscraper"></i>
+								</span>
+							</div>
+							<h3 class="mb-0 fw-bold">112 <span class="badge text-bg-success fw-medium ms-2 fs-12">20 Available Now</span></h3>
+						</div>
+						<p class="mb-1">
+							<span class="text-primary me-1"><i class="ti ti-point-filled"></i></span>
+							<span class="text-nowrap text-muted">Rented</span>
+							<span class="float-end"><b>92</b></span>
+						</p>
+						<p class="mb-0">
+							<span class="text-primary me-1"><i class="ti ti-point-filled"></i></span>
+							<span class="text-nowrap text-muted">Vacant</span>
+							<span class="float-end"><b>20</b></span>
+						</p>
+					</div>
+				</div>
+			</div><!-- end col -->
+		
+			<!-- Total Sales -->
+			<div class="col-lg col-auto">
+				<div class="card">
+					<div class="card-body border-start rounded border-3 border-info">
+						
+						<h5 class="text-muted fs-13 text-uppercase" title="Total Sales">Total Sales</h5>
+						<div class="d-flex align-items-center gap-2 my-3">
+							<div class="avatar-md flex-shrink-0">
+								<span class="avatar-title bg-info-subtle text-info rounded fs-22">
+									<i class="ti ti-cash"></i>
+								</span>
+							</div>
+							<h3 class="mb-0 fw-bold">$5.9M</h3>
+						</div>
+						<p class="mb-1">
+							<span class="text-primary me-1"><i class="ti ti-point-filled"></i></span>
+							<span class="text-nowrap text-muted">This Month</span>
+							<span class="float-end"><b>$1.2M</b></span>
+						</p>
+						<p class="mb-0">
+							<span class="text-primary me-1"><i class="ti ti-point-filled"></i></span>
+							<span class="text-nowrap text-muted">Total Yearly Sales</span>
+							<span class="float-end"><b>$42.8M</b></span>
+						</p>
+					</div>
+				</div>
+			</div><!-- end col -->
+		
+		</div><!-- end row -->
+		
 
-// -->
-</style>
+		<div class="row">
+			<div class="col-xxl-4">
+				<div class="card">
+					<div class="d-flex card-header justify-content-between border-bottom border-dashed align-items-center">
+						<h4 class="card-title">Client Demographics</h4>
+						<a href="javascript:void(0);" class="btn btn-sm btn-soft-primary">Generate Report <i class="ti ti-file-export ms-1"></i></a>
+					</div>
+			
+					<div class="card-body">
+						<div id="client-chart" class="apex-charts" data-colors="#f5707a,#3ac9d6,#4bd396"></div>
+			
+						<div class="row mt-3">
+							<div class="col-sm-4 text-start">
+								<p class="text-muted mb-1">Home Buyers</p>
+								<h4 class="mb-2">
+									<span class="ti ti-home text-primary"></span>
+									<span>189.2k</span>
+								</h4>
+								<span class="badge fs-12 badge-soft-success"><i class="ti ti-arrow-badge-up"></i> 5.42%</span>
+							</div>
+							<div class="col-sm-4 text-center">
+								<p class="text-muted mb-1">Property Sellers</p>
+								<h4 class="mb-2">
+									<span class="ti ti-building text-success"></span>
+									<span>134.8k</span>
+								</h4>
+								<span class="badge fs-12 badge-soft-danger"><i class="ti ti-arrow-badge-down"></i> 2.89%</span>
+							</div>
+							<div class="col-sm-4 text-end">
+								<p class="text-muted mb-1">Real Estate Investors</p>
+								<h4 class="mb-2">
+									<span class="ti ti-coin text-info"></span>
+									<span>78.4k</span>
+								</h4>
+								<span class="badge fs-12 badge-soft-success"><i class="ti ti-arrow-badge-up"></i> 6.18%</span>
+							</div>
+						</div>
+					</div>
+					<!-- end card body-->
+				</div>
+				<!-- end card -->
+			</div>
 
-</head>
+			<div class="col-xxl-8">
+				<div class="card card-h-100">
 
-<table width="76%" border="0" align="center" cellspacing="0" cellpadding="3" class="tableWidth">
-	<tr>
-	<td id="subTitle">HTTrack Website Copier - Open Source offline browser</td>
-	</tr>
-</table>
-<table width="76%" border="0" align="center" cellspacing="0" cellpadding="0" class="tableWidth">
-<tr class="blak">
-<td>
-	<table width="100%" border="0" align="center" cellspacing="1" cellpadding="0">
-	<tr>
-	<td colspan="6"> 
-		<table width="100%" border="0" align="center" cellspacing="0" cellpadding="10">
-		<tr> 
-		<td id="pageContent"> 
-<!-- ==================== End prologue ==================== -->
+					<div class="card-header d-flex flex-wrap border-bottom border-dashed align-items-center gap-3">
+						<h4 class="card-title me-auto">Revenue <span class="text-muted fw-normal fs-14">(609.5k Transactions)</span></h4>
 
-	<meta name="generator" content="HTTrack Website Copier/3.x">
-	<TITLE>Local index - HTTrack</TITLE>
-</HEAD>
-<BODY>
-<H1 ALIGN=Center>Index of locally available sites:</H1>
-	<TABLE BORDER="0" WIDTH="100%" CELLSPACING="1" CELLPADDING="0">
-		<TR>
-			<TD BACKGROUND="fade.gif">
-				&middot;
-					<A HREF="coderthemes.com/zircos/layouts/dashboard-real-estate.html">
-						Real Estate Dashboard | Zircos - Responsive Bootstrap 5 Admin Dashboard
-					</A>		
-			</TD>
-		</TR>
-	</TABLE>
-	<BR>
-	<BR>
-	<BR>
-  	<H6 ALIGN="RIGHT">
-	<I>Mirror and index made by HTTrack Website Copier [XR&amp;CO'2008]</I>
-	</H6>
-	<!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
-	<!-- Thanks for using HTTrack Website Copier! -->
-	<meta HTTP-EQUIV="Refresh" CONTENT="0; URL=coderthemes.com/zircos/layouts/dashboard-real-estate.html">
+						<div class="d-flex flex-wrap gap-1">
+							<button type="button" class="btn btn-light btn-sm">
+								All
+							</button>
+							<button type="button" class="btn btn-light active btn-sm">
+								1M
+							</button>
+							<button type="button" class="btn btn-light btn-sm">
+								6M
+							</button>
+							<button type="button" class="btn btn-light btn-sm">
+								1Y
+							</button>
+						</div>
+					</div>
 
+					<div class="card-body pt-1">
+						<div dir="ltr">
+							<div id="sessions-overview-users" class="apex-charts" data-colors="#3ac9d6,#4bd396"></div>
+						</div>
+					</div> <!-- end card-body -->
+				</div> <!-- end card-->
+			</div>
+		</div>
 
-<!-- ==================== Start epilogue ==================== -->
-		</td>
-		</tr>
-		</table>
-	</td>
-	</tr>
-	</table>
-</td>
-</tr>
-</table>
+		<div class="row">
+			<div class="col-xxl-8">
+				<div class="card">
+					<div class="d-flex card-header justify-content-between align-items-center border-bottom border-dashed">
+						<h4 class="card-title">Top Agents <i class="ti ti-info-octagon text-muted ms-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Based on user reviews and popularity."> </i></h4>
+						<div class="dropdown">
+							<a href="#" class="dropdown-toggle drop-arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="ti ti-dots-vertical"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<!-- item-->
+								<a href="javascript:void(0);" class="dropdown-item">Refresh Report</a>
+								<!-- item-->
+								<a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+							</div>
+						</div>
+					</div>
 
-<table width="76%" border="0" align="center" valign="bottom" cellspacing="0" cellpadding="0">
-	<tr>
-	<td id="footer"><small>&copy; 2008 Xavier Roche & other contributors - Web Design: Leto Kauler.</small></td>
-	</tr>
-</table>
+					<div class="card-body">
+						<div class="row align-items-center g-3">
+							<div class="col-xxl-4 col-md-6">
+								<div class="bg-light bg-opacity-50 rounded-3 p-3">
+									<div class="d-flex align-items-center gap-2">
+										<img src="assets/images/users/avatar-9.jpg" alt="agent-image" class="me-1 avatar-xl rounded-circle">
+										<div>
+											<h5>John Carter</h5>
+											<p class="text-muted">Luxury Property Specialist</p>
+											<p class="m-0 fs-14"><i class="ti ti-star-filled text-warning"></i> 5.0 &bull; <a href="#!" class="link-reset fw-medium">650+ Reviews <i class="ti ti-arrow-right"></i></a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-xxl-4 col-md-6">
+								<div class="bg-light bg-opacity-50 rounded-3 p-3">
+									<div class="d-flex align-items-center gap-2">
+										<img src="assets/images/users/avatar-2.jpg" alt="agent-image" class="me-1 avatar-xl rounded-circle">
+										<div>
+											<h5>Sarah Mitchell</h5>
+											<p class="text-muted">Com. Real Estate Agent</p>
+											<p class="m-0 fs-14"><i class="ti ti-star-filled text-warning"></i> 4.8 &bull; <a href="#!" class="link-reset fw-medium">480+ Reviews <i class="ti ti-arrow-right"></i></a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-xxl-4 col-md-6">
+								<div class="bg-light bg-opacity-50 rounded-3 p-3">
+									<div class="d-flex align-items-center gap-2">
+										<img src="assets/images/users/avatar-3.jpg" alt="agent-image" class="me-1 avatar-xl rounded-circle">
+										<div>
+											<h5>Michael Johnson</h5>
+											<p class="text-muted">Residential Property Expert</p>
+											<p class="m-0 fs-14"><i class="ti ti-star-filled text-warning"></i> 4.9 &bull; <a href="#!" class="link-reset fw-medium">520+ Reviews <i class="ti ti-arrow-right"></i></a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-xxl-4 col-md-6">
+								<div class="bg-light bg-opacity-50 rounded-3 p-3">
+									<div class="d-flex align-items-center gap-2">
+										<img src="assets/images/users/avatar-4.jpg" alt="agent-image" class="me-1 avatar-xl rounded-circle">
+										<div>
+											<h5>Jessica Williams</h5>
+											<p class="text-muted">Investment Property Specialist</p>
+											<p class="m-0 fs-14"><i class="ti ti-star-filled text-warning"></i> 4.6 &bull; <a href="#!" class="link-reset fw-medium">290+ Reviews <i class="ti ti-arrow-right"></i></a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-xxl-4 col-md-6">
+								<div class="bg-light bg-opacity-50 rounded-3 p-3">
+									<div class="d-flex align-items-center gap-2">
+										<img src="assets/images/users/avatar-5.jpg" alt="agent-image" class="me-1 avatar-xl rounded-circle">
+										<div>
+											<h5>Emily Brown</h5>
+											<p class="text-muted">First-Time Home Buyer Specialist</p>
+											<p class="m-0 fs-14"><i class="ti ti-star-filled text-warning"></i> 5.0 &bull; <a href="#!" class="link-reset fw-medium">420+ Reviews <i class="ti ti-arrow-right"></i></a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							<div class="col-xxl-4 col-md-6">
+								<div class="bg-light bg-opacity-50 rounded-3 p-3">
+									<div class="d-flex align-items-center gap-2">
+										<img src="assets/images/users/avatar-6.jpg" alt="agent-image" class="me-1 avatar-xl rounded-circle">
+										<div>
+											<h5>David Anderson</h5>
+											<p class="text-muted">High-End Property Consultant</p>
+											<p class="m-0 fs-14"><i class="ti ti-star-filled text-warning"></i> 4.7 &bull; <a href="#!" class="link-reset fw-medium">315+ Reviews <i class="ti ti-arrow-right"></i></a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
 
-</body>
+						<div class="text-center mt-3">
+							<a href="#" class="btn btn-sm btn-secondary">See All Agents <i class="ti ti-arrow-right ms-1"></i></a>
+						</div>
+					</div> <!-- end card-body-->
+				</div> <!-- end card-->
+			</div> <!-- end col-->
 
-</html>
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="d-flex card-header justify-content-between align-items-center border-bottom border-dashed">
+						<h4 class="card-title">Create Appointment</h4>
+						<div class="dropdown">
+							<a href="#" class="dropdown-toggle drop-arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="ti ti-dots-vertical"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a href="javascript:void(0);" class="dropdown-item">Refresh Report</a>
+								<a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+							</div>
+						</div>
+					</div>
 
+					<div class="card-body">
 
+						<input type="text" class="form-control d-none" data-provider="flatpickr" data-date-format="d M, Y" data-deafult-date="today" data-inline-date="true">
+
+						<div class="text-center mt-3 pt-2">
+							<a href="#" class="btn btn-sm btn-primary">Schedule a Metting <i class="ti ti-arrow-right ms-1"></i></a>
+						</div>
+					</div> <!-- end card-body-->
+				</div> <!-- end card-->
+			</div> <!-- end col -->
+			
+			<!-- end col-->
+		</div>
+		<!-- end row -->
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="d-flex card-header justify-content-between align-items-center">
+						<h4 class="card-title">All Agents & Listings</h4>
+						<a href="#" class="btn btn-sm btn-secondary">Add New <i class="ti ti-plus ms-1"></i></a>
+					</div>
+					<div class="card-body p-0">
+						<div class="table-responsive">
+							<table class="table table-hover table-nowrap table-custom table-centered m-0">
+								<thead class="bg-light bg-opacity-50 thead-sm">
+									<tr class="text-uppercase fs-12">
+										<th class="text-muted">Agent ID</th>
+										<th class="text-muted">Agent Name</th>
+										<th class="text-muted">Property Type</th>
+										<th class="text-muted">Location</th>
+										<th class="text-muted">Listing Date</th>
+										<th class="text-muted">Price</th>
+										<th class="text-muted">Status</th>
+										<th class="text-muted">•••</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>#A1023</td>
+										<td><a href="#" class="link-reset fw-medium">Michael Roberts</a></td>
+										<td>Luxury Villa</td>
+										<td>Los Angeles, CA</td>
+										<td>10 Mar, 2024</td>
+										<td>$2.5M</td>
+										<td><span class="badge bg-success-subtle text-success p-1">Available</span></td>
+										<td>
+											<a href="javascript: void(0);" class="text-muted fs-20"> <i class="ti ti-edit"></i></a>
+										</td>
+									</tr>
+		
+									<tr>
+										<td>#A1024</td>
+										<td><a href="#" class="link-reset fw-medium">Sarah Johnson</a></td>
+										<td>Condo</td>
+										<td>Miami, FL</td>
+										<td>12 Mar, 2024</td>
+										<td>$850K</td>
+										<td><span class="badge bg-warning-subtle text-warning p-1">Pending</span></td>
+										<td>
+											<a href="javascript: void(0);" class="text-muted fs-20"> <i class="ti ti-edit"></i></a>
+										</td>
+									</tr>
+		
+									<tr>
+										<td>#A1025</td>
+										<td><a href="#" class="link-reset fw-medium">James Miller</a></td>
+										<td>Townhouse</td>
+										<td>New York, NY</td>
+										<td>15 Mar, 2024</td>
+										<td>$1.2M</td>
+										<td><span class="badge bg-danger-subtle text-danger p-1">Sold</span></td>
+										<td>
+											<a href="javascript: void(0);" class="text-muted fs-20"> <i class="ti ti-edit"></i></a>
+										</td>
+									</tr>
+		
+									<tr>
+										<td>#A1026</td>
+										<td><a href="#" class="link-reset fw-medium">Emily Davis</a></td>
+										<td>Single-Family Home</td>
+										<td>Chicago, IL</td>
+										<td>18 Mar, 2024</td>
+										<td>$750K</td>
+										<td><span class="badge bg-success-subtle text-success p-1">Available</span></td>
+										<td>
+											<a href="javascript: void(0);" class="text-muted fs-20"> <i class="ti ti-edit"></i></a>
+										</td>
+									</tr>
+		
+									<tr>
+										<td>#A1027</td>
+										<td><a href="#" class="link-reset fw-medium">Robert White</a></td>
+										<td>Apartment</td>
+										<td>San Francisco, CA</td>
+										<td>22 Mar, 2024</td>
+										<td>$620K</td>
+										<td><span class="badge bg-success-subtle text-success p-1">Available</span></td>
+										<td>
+											<a href="javascript: void(0);" class="text-muted fs-20"> <i class="ti ti-edit"></i></a>
+										</td>
+									</tr>
+		
+									<tr>
+										<td>#A1028</td>
+										<td><a href="#" class="link-reset fw-medium">Jessica Brown</a></td>
+										<td>Commercial Space</td>
+										<td>Dallas, TX</td>
+										<td>25 Mar, 2024</td>
+										<td>$3.8M</td>
+										<td><span class="badge bg-danger-subtle text-danger p-1">Sold</span></td>
+										<td>
+											<a href="javascript: void(0);" class="text-muted fs-20"> <i class="ti ti-edit"></i></a>
+										</td>
+									</tr>
+		
+								</tbody>
+							</table>
+						</div>
+		
+						<div class="card-footer border-0">
+							<div class="align-items-center justify-content-between row text-center text-sm-start">
+								<div class="col-sm">
+									<div class="text-muted">
+										Showing <span class="fw-semibold">6</span> of <span class="fw-semibold">1,024</span> Results
+									</div>
+								</div>
+								<div class="col-sm-auto mt-3 mt-sm-0">
+									<ul class="pagination pagination-boxed pagination-sm mb-0 justify-content-center">
+										<li class="page-item disabled">
+											<a href="#" class="page-link"><i class="ti ti-chevron-left"></i></a>
+										</li>
+										<li class="page-item active">
+											<a href="#" class="page-link">1</a>
+										</li>
+										<li class="page-item">
+											<a href="#" class="page-link">2</a>
+										</li>
+										<li class="page-item">
+											<a href="#" class="page-link">3</a>
+										</li>
+										<li class="page-item">
+											<a href="#" class="page-link"><i class="ti ti-chevron-right"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div> <!-- -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div> <!-- container -->
+
+	<!-- Footer Start -->
+	<footer class="footer">
+		<div class="page-container">
+			<div class="row">
+				<div class="col-md-6 text-center text-md-start">
+					<script>document.write(new Date().getFullYear())</script> © Zircos - By <a href="https://1.envato.market/coderthemes" target="_blank" class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">Coderthemes</a>
+				</div>
+				<div class="col-md-6">
+					<div class="text-md-end footer-links d-none d-md-block">
+						<a href="javascript: void(0);">About</a>
+						<a href="javascript: void(0);">Support</a>
+						<a href="javascript: void(0);">Contact Us</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- end Footer -->
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+{% endblock %}
