@@ -88,6 +88,8 @@ class PropertySource(models.Model):
     source_name = models.CharField(max_length=100)
     source_url = models.URLField()
         
+    def __str__(self):
+        return self.source_name
         
 class Property(models.Model):
     title = models.CharField(max_length=255, verbose_name="Property Title")

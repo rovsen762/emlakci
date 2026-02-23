@@ -86,8 +86,8 @@ local_settings.py
 
 .env
 
-db.sqlite3
-*.sqlite3
+# db.sqlite3
+# *.sqlite3
 
 .venv
 venv
@@ -105,13 +105,13 @@ venv
 # static
 # static/ 
 
-staticfiles/*
-staticfiles
-staticfiles/ 
+# staticfiles/*
+# staticfiles
+# staticfiles/ 
 
 
-media/*
-media
-media/ 
+# media/*
+# media
+# media/ 
 
 celerybeat-schedule
