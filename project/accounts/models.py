@@ -67,13 +67,17 @@ class AccountCustomers(models.Model):
     email = models.EmailField(verbose_name="Customer Email")
     phone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Customer Phone")
     telegram_username = models.CharField(max_length=255, blank=True, null=True, verbose_name="Customer Telegram Username")
+    created_at = models.DateTimeField(
+    auto_now_add=True,
+    verbose_name="Customer Created Date"
+)
     
     class Meta:
         verbose_name = "Account Customer"
         verbose_name_plural = "Account Customers"
         
     def __str__(self):
-        return f"{self.account.username} - {self.name}"
+        return f"{self.account.username} - {self.name} - {self.id}"
         
         
 class AccountCustomerPreferries(models.Model):

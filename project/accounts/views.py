@@ -15,7 +15,7 @@ import random
 from utils.decorators import redirect_authenticated_user
 from datetime import datetime
 
-
+###############AUTHENTICATION VIEWS################
 
 def generate_otp():
     return str(random.randint(100000, 999999))
@@ -251,6 +251,53 @@ def reset_password(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+
+
+
+
+
+
+######################MEMBERS#################################
+
+
+@login_required(login_url='login')
+def customer_list(request):
+    account = request.user
+    account_customers = AccountCustomers.objects.filter(account=account)
+    context = {
+        'account': account,
+        'account_customers': account_customers
+    }
+    return render(request, 'customer-list.html', context)
+
+
+@login_required(login_url='login')
+def customer_details(request, customer_id):
+    account = request.user
+    customer = get_object_or_404(AccountCustomers, id=customer_id, account=account)
+    context = {
+        'account': account,
+        'customer': customer
+    }
+    return render(request, 'customers-details.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

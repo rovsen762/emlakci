@@ -1,4 +1,6 @@
-from .views import register,user_login,forgot_password,verify_forgot_password_otp,reset_password,user_logout,verify_register_otp
+from .views import register,user_login,forgot_password,verify_forgot_password_otp,reset_password,user_logout,verify_register_otp,\
+    customer_list, customer_details
+
 from django.urls import path
 
 urlpatterns = [
@@ -9,4 +11,7 @@ urlpatterns = [
     path('verify-forgot-password-otp/', verify_forgot_password_otp, name='verify-forgot-password-otp'),
     path('reset-password/', reset_password, name='reset-password'),
     path('logout/', user_logout, name='logout'),
+    
+    path('customer-list/', customer_list, name='customer-list'),
+    path('customer-details/<int:customer_id>/', customer_details, name='customer-details'),
 ]
