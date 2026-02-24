@@ -19,6 +19,17 @@ class AccountCreationForm(UserCreationForm):
         self.fields['password2'].widget.attrs.update({'class': 'form-control','placeholder':'Şifrəni təkrar yazın'})
 
 
+class VerifyRegisterOtpForm(forms.Form):
+    otp = forms.CharField(
+        max_length=6,
+        required=True,
+        label="OTP kodu",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'XXXXXX'
+        })
+    )
+
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)

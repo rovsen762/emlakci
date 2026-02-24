@@ -1,8 +1,9 @@
 import django
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from accounts.models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries
-# Create your views here.
+from functools import wraps
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='login')  
 def index(request):
     return render(request, 'index.html')

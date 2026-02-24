@@ -22,6 +22,7 @@ class Account(AbstractUser):
     class GenderChoices(models.TextChoices):
         MALE = "male", "Male"
         FEMALE = "female", "Female"
+        UNDEFINED = "undefined", "Undefined"
         
     
     image = models.ImageField(upload_to=logo_dir_path,null=True,blank=True,verbose_name="Profile photo")
@@ -29,11 +30,14 @@ class Account(AbstractUser):
     birth_date = models.DateField(null=True, blank=True, verbose_name="Birth date")
     city = models.CharField(max_length=100, null=True, blank=True, verbose_name="City")
     gender = models.CharField(max_length=10, 
-                              default=GenderChoices.MALE,choices=GenderChoices.choices,
+                              default=GenderChoices.UNDEFINED,choices=GenderChoices.choices,
                               null=True, blank=True, verbose_name="Gender")
     bio = models.TextField(null=True, blank=True, verbose_name="About")
     
     otp = models.CharField(max_length=6, null=True, blank=True, verbose_name="Email Verification OTP")
+    otp_created_at = models.DateTimeField(null=True, blank=True, verbose_name="OTP creation time")
+
+    
     reset_password_otp = models.CharField(max_length=6, blank=True, null=True, verbose_name="Password Reset OTP")
     is_reset_password_otp_verified = models.BooleanField(default=False, verbose_name="'Forgot Password' OTP Verified?")
     reset_password_request_count = models.IntegerField(default=0, verbose_name="Number of password reset requests in a day")

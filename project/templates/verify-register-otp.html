@@ -39,13 +39,9 @@
                         <img src="{% static 'images/logo.png' %}" alt="logo light" height="26" class="logo-light">
                     </a>
 
-                    <h4 class="fw-semibold mb-2 fs-20">OTP kodu təsdiqləyin</h4>
+                    <h4 class="fw-semibold mb-2 fs-20">OTP kodunu daxil edin</h4>
+                    <p class="text-muted mb-4">Email-ə göndərilmiş 6 rəqəmli kodu daxil edin</p>
 
-                    <p class="text-muted mb-4">
-                        Lütfən {{ user_email|default:"abc@xyz.com" }} ünvanına göndərilmiş 6 rəqəmli kodu daxil edin
-                    </p>
-
-                    <!-- Messages -->
                     {% if messages %}
                         {% for message in messages %}
                             <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
@@ -55,8 +51,7 @@
                         {% endfor %}
                     {% endif %}
 
-                    <!-- OTP Form -->
-                    <form action="{% url 'verify-forgot-password-otp' %}" method="post" class="text-start">
+                    <form action="{% url 'verify-register-otp' %}" method="post">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label class="form-label" for="otp">6 rəqəmli OTP kodunu daxil edin</label>
@@ -65,17 +60,11 @@
                                 <div class="text-danger fs-13">{{ error }}</div>
                             {% endfor %}
                         </div>
-
-                        <div class="mb-3 d-grid">
-                            <button type="submit" class="btn btn-primary fw-semibold">OTP kodunu təsdiqlə</button>
-                        </div>
-
-                        <p class="mb-0 text-center text-muted">
-                            OTP kodunu almamısınız? 
-                            <a href="{% url 'forgot-password' %}" class="link-primary fw-semibold text-decoration-underline">
-                                Yenidən göndər
-                            </a>
-                        </p>
+                        <button type="submit" class="btn btn-primary">OTP təsdiqlə</button>
+                    </form>
+                    <p class="text-center mt-2">
+                        OTP kodunu almamısınız? <a href="{% url 'register' %}">Yenidən göndər</a>
+                    </p>
 </form>
                 </div>
 

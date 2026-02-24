@@ -2,7 +2,7 @@
 from .models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries
 import email
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import AccountCreationForm, LoginForm, ForgotPasswordForm, VerifyForgotPasswordOtpForm, ResetPasswordForm
+from .forms import AccountCreationForm, LoginForm, ForgotPasswordForm, VerifyForgotPasswordOtpForm, ResetPasswordForm,VerifyRegisterOtpForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -13,25 +13,93 @@ from .emails import send_otp_via_email, send_otp_for_reset_password
 from datetime import timedelta
 import random
 from utils.decorators import redirect_authenticated_user
+from datetime import datetime
 
 
+
+def generate_otp():
+    return str(random.randint(100000, 999999))
+
+MAX_DAILY_RESET_REQUEST = 5
+MAX_DAILY_REGISTER_REQUEST = 5
+OTP_EXPIRY_MINUTES = 5
+
+
+# Register view
 def register(request):
     if request.method == 'POST':
         form = AccountCreationForm(request.POST)
         if form.is_valid():
-            if form.cleaned_data['terms_accepted']:
-                form.save()
-                username = form.cleaned_data.get('username')
-                messages.success(request,'Hesab yaradıldı '+ username)
-                user = authenticate(request, username=username,
-                                    password=form.cleaned_data['password1'])
-                login(request, user)
-                return redirect('index')
-            else:
-                messages.info(request,'Hesab yarada bilmək üçün şərtlər və qaydaları qəbul edin!')
+            email = form.cleaned_data['email']
+
+            if Account.objects.filter(email=email).exists():
+                messages.error(request, "Bu email artıq istifadə olunub.")
+                return render(request, 'register.html', {'form': form})
+
+            otp = generate_otp()
+            request.session['register_data'] = form.cleaned_data
+            request.session['register_otp'] = otp
+            request.session['register_otp_created_at'] = timezone.now().isoformat()
+
+            send_otp_via_email(email, otp)  # modela yazma, yalnız email göndər
+
+            messages.success(request, "Email-ə OTP göndərildi. Zəhmət olmasa daxil edin.")
+            return redirect('verify-register-otp')
     else:
         form = AccountCreationForm()
+
     return render(request, 'register.html', {'form': form})
+
+
+
+def verify_register_otp(request):
+    otp = request.session.get('register_otp')
+    otp_created_at = request.session.get('register_otp_created_at')
+    register_data = request.session.get('register_data')
+
+    if not otp or not register_data:
+        return redirect('register')
+
+    if request.method == 'POST':
+        form = VerifyRegisterOtpForm(request.POST)
+        if form.is_valid():
+            otp_created_at_dt = datetime.fromisoformat(otp_created_at)
+
+            # OTP expiry yoxla
+            if timezone.now() > otp_created_at_dt + timedelta(minutes=OTP_EXPIRY_MINUTES):
+                messages.error(request, "OTP müddəti bitmişdir. Yenidən göndərin.")
+                return redirect('register')
+
+            entered_otp = form.cleaned_data['otp']
+            if entered_otp != otp:
+                messages.error(request, "OTP yanlışdır.")
+                return render(request, 'verify-register-otp.html', {'form': form})
+
+            # OTP düzgündür → hesab yaradılır
+            form_data = register_data
+            user = Account.objects.create_user(
+                username=form_data['username'],
+                email=form_data['email'],
+                password=form_data['password1'],
+            )
+            user.is_verified = True
+            user.save()
+
+            # Session-u təmizlə
+            for key in ['register_otp', 'register_otp_created_at', 'register_data']:
+                request.session.pop(key, None)
+
+            messages.success(request, "Hesab uğurla yaradıldı. İndi daxil ola bilərsiniz.")
+            return redirect('login')
+
+        else:
+            # form invalid olduqda input field görünsün
+            return render(request, 'verify-register-otp.html', {'form': form})
+
+    else:
+        form = VerifyRegisterOtpForm()
+
+    return render(request, 'verify-register-otp.html', {'form': form})
 
 
 def user_login(request):
@@ -57,12 +125,6 @@ def user_login(request):
     return render(request, 'login.html', {'form': form})
 
 
-
-def generate_otp():
-    return str(random.randint(100000, 999999))
-
-MAX_DAILY_RESET_REQUEST = 5
-OTP_EXPIRY_MINUTES = 5
 
 
 def forgot_password(request):
@@ -149,7 +211,6 @@ def verify_forgot_password_otp(request):
 
 
 
-@redirect_authenticated_user
 def reset_password(request):
     user_id = request.session.get('reset_user_id')
 
@@ -187,10 +248,10 @@ def reset_password(request):
     return render(request, 'reset-password.html', {'form': form})
 
 
-
 def user_logout(request):
     logout(request)
-    return redirect('index')
+    return redirect('login')
+
 
 
 # class WishlistListView(LoginRequiredMixin, ListView):
