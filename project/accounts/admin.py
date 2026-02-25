@@ -1,12 +1,16 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries
+from .models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries,Balance, PreferryPriority, AccountFilterMatch, Subscription
 
 admin.site.register(Plan)
 admin.site.register(AccountCustomers)
 admin.site.register(AccountFilters) 
 admin.site.register(AccountCustomerPreferries)
+admin.site.register(Balance)
+admin.site.register(PreferryPriority)
+admin.site.register(AccountFilterMatch)
+admin.site.register(Subscription)
 
 
 
@@ -41,6 +45,7 @@ class AccountAdmin(UserAdmin):
         ("Profile Information", {
             "fields": (
                 "image",
+                "cover_image",
                 "phone",
                 "birth_date",
                 "city",
@@ -75,6 +80,7 @@ class AccountAdmin(UserAdmin):
             "fields": (
                 "email",
                 "image",
+                "cover_image",
                 "phone",
                 "birth_date",
                 "city",

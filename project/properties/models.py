@@ -1,4 +1,5 @@
 from django.db import models
+from utils.photo_save import logo_dir_path
 
 # Create your models here.
 
@@ -90,6 +91,7 @@ class PropertySource(models.Model):
     def __str__(self):
         return self.source_name
         
+        
 class Property(models.Model):
     title = models.CharField(max_length=255, verbose_name="Property Title")
     description = models.TextField(verbose_name="Property Description")
@@ -97,16 +99,17 @@ class Property(models.Model):
     room_count = models.IntegerField(verbose_name="Room Count")
     is_sale = models.BooleanField(default=False, verbose_name="Is Sale?")
     is_rent = models.BooleanField(default=False, verbose_name="Is Rent?")
+    image=models.ImageField(upload_to=logo_dir_path, null=True, blank=True, verbose_name="Property Image")
     property_area = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Property Area")
+    document_type = models.CharField(max_length=255, null=True, blank=True, verbose_name="Document Type")
     is_documented = models.BooleanField(default=False, verbose_name="Documented?")
     have_things = models.BooleanField(default=False, verbose_name="Have things?")
     communal = models.BooleanField(default=False, verbose_name="Communal?")
     floor = models.IntegerField(null=True, blank=True, verbose_name="Floor")
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, related_name="properties", verbose_name="Property Location")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="properties", verbose_name="Preferred Category")
-    location_area = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Property Area")
-    
-    source = models.ForeignKey(PropertySource, on_delete=models.CASCADE)
+    propertyist_phone = models.CharField(max_length=20, null=True, blank=True, verbose_name="Propertyist Phone")
+    source = models.ForeignKey(PropertySource, on_delete=models.CASCADE, related_name="properties", verbose_name="Property Source")
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     

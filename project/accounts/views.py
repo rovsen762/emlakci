@@ -274,6 +274,17 @@ def customer_list(request):
 
 
 @login_required(login_url='login')
+def customer_grid(request):
+    account = request.user
+    account_customers = AccountCustomers.objects.filter(account=account)
+    context = {
+        'account': account,
+        'account_customers': account_customers
+    }
+    return render(request, 'customer-grid.html', context)
+
+
+@login_required(login_url='login')
 def customer_details(request, customer_id):
     account = request.user
     customer = get_object_or_404(AccountCustomers, id=customer_id, account=account)
@@ -283,6 +294,15 @@ def customer_details(request, customer_id):
     }
     return render(request, 'customers-details.html', context)
 
+
+
+@login_required(login_url='login')
+def profile(request):
+    account = request.user
+    context = {
+        'account': account
+    }
+    return render(request, 'profile.html', context)
 
 
 

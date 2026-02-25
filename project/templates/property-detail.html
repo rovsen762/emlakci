@@ -1,0 +1,318 @@
+{% extends 'partials/_base.html' %}
+
+{% load static %}
+
+
+{% block content %} 
+
+<!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+        <div class="page-content">
+            <div class="page-container">
+
+                
+                <div class="page-title-head d-flex align-items-center gap-2">
+                    <div class="flex-grow-1">
+                        <h4 class="fs-17 mb-0">Property Detail</h4>
+                    </div>
+
+                    <div class="text-end">
+                        <ol class="breadcrumb m-0 py-0 fs-13">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Zircos</a></li>
+                            
+                            <li class="breadcrumb-item active">Property Detail</li>
+                        </ol>
+                    </div>
+                </div>
+                
+
+                
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card card-body">
+                                <h4 class="card-title mb-2">Photos</h4>
+                                <!-- Crossfade -->
+                                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                                    <div class="carousel-inner shadow" role="listbox">
+                                        <div class="carousel-item text-center active">
+                                            <img src="assets/images/properties/3.jpg" alt="" class="img-fluid bg-body img-thumbnail">
+                                        </div>
+                                        <div class="carousel-item text-center">
+                                            <img src="assets/images/properties/2.jpg" alt="" class="img-fluid bg-body img-thumbnail">
+                                        </div>
+                                        <div class="carousel-item text-center">
+                                            <img src="assets/images/properties/1.jpg" alt="" class="img-fluid bg-body img-thumbnail">
+                                        </div>
+                                        <div class="carousel-item text-center">
+                                            <img src="assets/images/properties/4.jpg" alt="" class="img-fluid bg-body img-thumbnail">
+                                        </div>
+                                        <div class="carousel-item text-center">
+                                            <img src="assets/images/properties/5.jpg" alt="" class="img-fluid bg-body img-thumbnail">
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-indicators m-0 mt-2 d-lg-flex d-none position-static h-100 rounded gap-1">
+                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" class="h-auto rounded bg-light-subtle border active" style="width: auto !important;">
+                                            <img src="assets/images/properties/3.jpg" class="d-block rounded img-fluid">
+                                        </button>
+                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="1" aria-label="Slide 2" class="h-auto rounded bg-light-subtle border" style="width: auto !important;">
+                                            <img src="assets/images/properties/2.jpg" class="d-block rounded img-fluid">
+                                        </button>
+                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="2" aria-label="Slide 3" class="h-auto rounded bg-light-subtle border" style="width: auto !important;">
+                                            <img src="assets/images/properties/1.jpg" class="d-block rounded img-fluid">
+                                        </button>
+                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="3" aria-label="Slide 4" class="h-auto rounded bg-light-subtle border" style="width: auto !important;">
+                                            <img src="assets/images/properties/4.jpg" class="d-block rounded img-fluid">
+                                        </button>
+                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="4" aria-label="Slide 1" class="h-auto rounded bg-light-subtle border" style="width: auto !important;">
+                                            <img src="assets/images/properties/5.jpg" class="d-block rounded img-fluid">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end slider -->
+
+                            <div class="card card-body">
+                                <h4>{{ property.title }}</h4>
+                                <p class="text-muted"><i class="ti ti-map-pin me-2"></i>245 E 20th St, New York, NY 201609</p>
+
+                                <p class="text-muted mb-4">{{property.description}}</p>
+
+                                <h4 class="mb-3">General Amenities</h4>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <ul class="list-unstyled proprerty-features">
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Swimming pool
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Air conditioning
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Internet
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Radio
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Balcony
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Roof terrace
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Cable TV
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Electricity
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--- end col -->
+
+                                    <div class="col-sm-4">
+                                        <ul class="list-unstyled proprerty-features">
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Terrace
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Coffee pot
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Oven
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Towelwes
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Computer
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Grill
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Parquet
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--- end col -->
+
+                                    <div class="col-sm-4">
+                                        <ul class="list-unstyled proprerty-features">
+
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Dishwasher
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near Green Zone
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near Church
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near Hospital
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near School
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near Shop
+                                            </li>
+                                            <li class="mb-2 fs-15">
+                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Natural Gas
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--- end col -->
+                                </div>
+                                <!-- end row -->
+                            </div>
+
+                            <div class="card card-body">
+                                <h4 class="card-title mb-2">Location</h4>
+                                <iframe src="https://www.google.com/maps/embed/v1/place?q=New+York+University&amp;key=AIzaSyBSFRN6WWGYwmFi498qXXsD2UwkbmD74v4&amp;zoom=18&amp;maptype=satellite" style="width: 100%; height: 360px; overflow:hidden; border:0;"></iframe>
+                            </div>
+
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-lg-4">
+                            <div class="text-center card card-body">
+                                <div class="text-start">
+                                    <h4 class="card-title mb-4">Agent</h4>
+                                </div>
+                                <div class="member-card">
+                                    <div class="avatar-xl position-relative mb-2 mx-auto d-block">
+                                        <img src="assets/images/users/avatar-4.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
+                                        <i class="ti ti-star-filled position-absolute top-0 end-0 bg-white rounded-circle shadow text-success border" style="padding: 4px;"></i>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <h5 class="fs-18 mb-1">Mark McKnight</h5>
+                                        <p class="fs-14">
+                                            <i class="ti ti-star-filled text-warning"></i>
+                                            <i class="ti ti-star-filled text-warning"></i>
+                                            <i class="ti ti-star-filled text-warning"></i>
+                                            <i class="ti ti-star-filled text-warning"></i>
+                                            <i class="ti ti-star-filled text-warning"></i>
+                                            <span>(29)</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item border-end px-3">
+                                                <h4>84</h4>
+                                                <p>Listed Properties</p>
+                                            </li>
+
+                                            <li class="list-inline-item px-3">
+                                                <h4>58</h4>
+                                                <p>Sale Properties</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <button type="button" class="btn btn-danger rounded-pill">Send Message</button>
+
+                                </div>
+                                <!-- end membar card -->
+                            </div>
+                            <!-- end card-box -->
+
+                            <div class="card card-body">
+                                <h4 class="card-title mb-2">Property Details</h4>
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Price:</th>
+                                                <td>$390,000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Contract type: </th>
+                                                <td><span class="label label-danger">For Sale</span></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Bathrooms:</th>
+                                                <td>1.5</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Square ft:</th>
+                                                <td>468</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Garage Spaces:</th>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Land Size:</th>
+                                                <td>721 m²</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Floors:</th>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Listed for:</th>
+                                                <td>15 days</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Available:</th>
+                                                <td>Immediately</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Pets:</th>
+                                                <td>Pets Allowed</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Bedrooms:</th>
+                                                <td>3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end card-box -->
+
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end property-detail-wrapper -->
+
+            </div> <!-- container -->
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="page-container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start">
+                            <script>document.write(new Date().getFullYear())</script> © Zircos - By <a href="https://1.envato.market/coderthemes" target="_blank" class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">Coderthemes</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-end footer-links d-none d-md-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}

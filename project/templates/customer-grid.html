@@ -1,0 +1,144 @@
+{% extends 'partials/_base.html' %}
+
+{% load static %}
+
+
+{% block content %} 
+
+
+<!-- ==================================================== -->
+          <!-- Start right Content here -->
+          <!-- ==================================================== -->
+          <div class="page-content">
+
+               <!-- Start Container Fluid -->
+               <div class="container-fluid">
+
+                    <!-- ========== Page Title Start ========== -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <br>
+                                <h4 class="mb-0 fw-semibold">Customer Grid</h4>
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Customers</a></li>
+                                    <li class="breadcrumb-item active">Customer Grid</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ========== Page Title End ========== -->
+
+                    <div class="row">
+                        {% for customer in account_customers %}
+                         <div class="col-md-4 col-xl-4">
+                              <div class="card overflow-hidden">
+                                
+                                   <div class="card-body">
+                                        <div class="customer-bg rounded position-relative">
+                                             <img src="{{customer.image.url}}" alt="" class="avatar-xl border border-light border-3 rounded-circle position-absolute top-100 start-0 translate-middle ms-5">
+                                             <span class="position-absolute top-0 end-0 p-1">
+                                                <a href="{% url 'customer-details' customer.id %}" class="btn btn-dark avatar-sm d-inline-flex align-items-center justify-content-center fs-20 rounded text-light">
+                                                    <i class="ti ti-eye"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                        <div class="mt-5 pt-3 ms-1">
+                                             <div class="d-flex justify-content-between align-items-center mb-3">
+                                                  <a href="customers-details.html" class="fs-18 link-primary fw-semibold">{{ customer.name }}</a>
+                                                  <div>
+                                                       <span class="badge bg-success text-white fs-12 px-2 py-1">Available</span>
+                                                  </div>
+                                             </div>
+                                             <p class="text-muted fw-medium fs-14 mb-1"><span class="text-dark me-1">Email Address : </span> {{ customer.email }}</p>
+                                             <p class="text-muted fw-medium fs-14 mb-1"><span class="text-dark me-1">Contact Number : </span> {{ customer.phone }}</p>
+                                             <p class="text-muted fw-medium fs-14 mb-1"><span class="text-dark me-1">Address : </span> {{ customer.address }}</p>
+                                             <div class="row mt-3 justify-content-between">
+                                                  <div class="col-lg-3">
+                                                       <p class="fw-medium mb-2">View Property</p>
+                                                       <h5 class="mb-0 fw-semibold text-dark">231</h5>
+                                                  </div>
+                                                  <div class="col-lg-3">
+                                                       <p class="fw-medium mb-2">Own Property</p>
+                                                       <h5 class="mb-0 fw-semibold text-dark">27</h5>
+                                                  </div>
+                                                  <div class="col-lg-4">
+                                                       <p class="fw-medium mb-2">Invest On Property</p>
+                                                       <h5 class="mb-0 fw-semibold text-dark">$928,128</h5>
+                                                  </div>
+                                             </div>
+                                             <h4 class="mt-3 fs-17">Social Information :</h4>
+                                             <ul class="list-inline d-flex gap-1 mb-0 align-items-center mt-3">
+                                                  <li class="list-inline-item">
+                                                  <a href="javascript: void(0);" class="btn btn-soft-primary avatar-sm d-flex align-items-center justify-content-center fs-20">
+                                                       <i class="ti ti-brand-facebook"></i>
+                                                  </a>
+                                             </li>
+
+                                             <li class="list-inline-item">
+                                                  <a href="javascript: void(0);" class="btn btn-soft-danger avatar-sm d-flex align-items-center justify-content-center fs-20">
+                                                       <i class="ti ti-brand-instagram"></i>
+                                                  </a>
+                                             </li>
+
+                                             <li class="list-inline-item">
+                                                  <a href="javascript: void(0);" class="btn btn-soft-info avatar-sm d-flex align-items-center justify-content-center  fs-20">
+                                                       <i class="ti ti-brand-telegram"></i>
+                                                  </a>
+                                             </li>
+                                             <li class="list-inline-item">
+                                                  <a href="javascript: void(0);" class="btn btn-soft-success avatar-sm d-flex align-items-center justify-content-center fs-20">
+                                                       <i class="ti ti-brand-whatsapp"></i>
+                                                  </a>
+                                             </li>
+                                             </ul>
+                                        </div>
+                                   </div>
+                                   <div class="card-footer border-top border-dashed gap-1 hstack">
+                                        <a href="#!" class="btn btn-primary w-100">Open Chat</a>
+                                        <a href="#!" class="btn btn-light w-100">Call To Customer</a>
+                                    </div>
+                                    
+                              </div>
+                         </div>
+                         {% endfor %}
+                        
+                         <div class="card-footer border-top-0">
+                            <ul class="pagination pagination-boxed justify-content-end mb-0">
+                                <li class="page-item disabled">
+                                    <a href="#" class="page-link"><i class="ti ti-chevron-left"></i></a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link">1</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a href="#" class="page-link">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link">4</a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link">5</a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link"><i class="ti ti-chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+
+               </div>
+               <!-- End Container Fluid -->
+
+          </div>
+          <!-- ==================================================== -->
+          <!-- End Page Content -->
+          <!-- ==================================================== -->
+
+
+
+{% endblock %}

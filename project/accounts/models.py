@@ -26,6 +26,7 @@ class Account(AbstractUser):
         
     
     image = models.ImageField(upload_to=logo_dir_path,null=True,blank=True,verbose_name="Profile photo")
+    cover_image = models.ImageField(upload_to=logo_dir_path,null=True,blank=True,verbose_name="Cover photo")
     phone = models.CharField(max_length=20, blank=True, null=True,verbose_name="Phone number")
     birth_date = models.DateField(null=True, blank=True, verbose_name="Birth date")
     city = models.CharField(max_length=100, null=True, blank=True, verbose_name="City")
@@ -62,11 +63,20 @@ class Account(AbstractUser):
         
         
 class AccountCustomers(models.Model):
+    class GenderChoices(models.TextChoices):
+        MALE = "male", "Male"
+        FEMALE = "female", "Female"
+        UNDEFINED = "undefined", "Undefined"
+        
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="customers")
     name = models.CharField(max_length=255, verbose_name="Customer Name")
     email = models.EmailField(verbose_name="Customer Email")
     phone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Customer Phone")
     telegram_username = models.CharField(max_length=255, blank=True, null=True, verbose_name="Customer Telegram Username")
+    gender = models.CharField(max_length=10, 
+                              default=GenderChoices.UNDEFINED,choices=GenderChoices.choices,
+                              null=True, blank=True, verbose_name="Customer Gender")
+    address = models.CharField(max_length=255, blank=True, null=True, verbose_name="Customer Address")
     created_at = models.DateTimeField(
     auto_now_add=True,
     verbose_name="Customer Created Date"
@@ -160,6 +170,7 @@ class AccountFilterMatch(models.Model):
         verbose_name = "Account Filter Match"
         verbose_name_plural = "Account Filter Matches"
     
+    
 class Subscription(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True)
@@ -167,6 +178,8 @@ class Subscription(models.Model):
     end_date = models.DateTimeField()
     is_active = models.BooleanField(default=True)
     
+    def __str__(self):  
+        return f"{self.account.username} - {self.plan.name if self.plan else 'No Plan'}"
     
     class Meta:
         verbose_name = "Subscription"
@@ -174,3 +187,14 @@ class Subscription(models.Model):
         
         
         
+        
+class Balance(models.Model):
+    account = models.OneToOneField(Account, on_delete=models.CASCADE)
+    balance = models.DecimalField(max_digits=7, decimal_places=2, default=0.00)
+    
+    def __str__(self):
+        return f"{self.account.username} - Balance: {self.balance}"
+    
+    class Meta:
+        verbose_name = "Balance"
+        verbose_name_plural = "Balances"
