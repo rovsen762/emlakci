@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from utils.photo_save import logo_dir_path
 
+
 class Plan(models.Model):
     name = models.CharField(max_length=255, verbose_name="Plan Name")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Plan Price")
     duration_days = models.IntegerField(verbose_name="Plan Duration (days)")
     max_notifications = models.IntegerField(verbose_name="Maximum Notifications")
+    is_deleted = models.BooleanField(default=False, verbose_name="Deleted?")
     
     def __str__(self):
         return self.name
@@ -77,10 +79,8 @@ class AccountCustomers(models.Model):
                               default=GenderChoices.UNDEFINED,choices=GenderChoices.choices,
                               null=True, blank=True, verbose_name="Customer Gender")
     address = models.CharField(max_length=255, blank=True, null=True, verbose_name="Customer Address")
-    created_at = models.DateTimeField(
-    auto_now_add=True,
-    verbose_name="Customer Created Date"
-)
+    created_at = models.DateTimeField(auto_now_add=True,verbose_name="Customer Created Date")
+    is_deleted = models.BooleanField(default=False, verbose_name="Deleted?")
     
     class Meta:
         verbose_name = "Account Customer"
@@ -115,7 +115,7 @@ class AccountCustomerPreferries(models.Model):
     floor = models.IntegerField(null=True, blank=True, verbose_name="Floor")
     location = models.ManyToManyField("properties.Location", blank=True,related_name="customer_preferries", verbose_name="Preferred Location")
     category = models.ForeignKey("properties.Category", on_delete=models.SET_NULL, null=True, blank=True, related_name="customer_preferries", verbose_name="Preferred Category")
-    
+    is_deleted = models.BooleanField(default=False, verbose_name="Deleted?")
     
     class Meta:
         verbose_name = "Account Customer Preferry"
@@ -131,6 +131,7 @@ class PreferryPriority(models.Model):
     weight_price = models.IntegerField(default=30)
     weight_room = models.IntegerField(default=20)
     weight_category = models.IntegerField(default=10)
+    is_deleted = models.BooleanField(default=False, verbose_name="Deleted?")
     
     class Meta:
         verbose_name = "Preferry Priority"
@@ -151,6 +152,7 @@ class AccountFilters(models.Model):
     is_sale = models.BooleanField(default=False, verbose_name="Is Sale?")
     is_rent = models.BooleanField(default=False, verbose_name="Is Rent?")
     is_active = models.BooleanField(default=True)
+    is_deleted = models.BooleanField(default=False, verbose_name="Deleted?")
     
     class Meta:
         verbose_name = "Account Filter"
@@ -189,7 +191,7 @@ class Subscription(models.Model):
         
         
 class Balance(models.Model):
-    account = models.OneToOneField(Account, on_delete=models.CASCADE)
+    account = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="balance")
     balance = models.DecimalField(max_digits=7, decimal_places=2, default=0.00)
     
     def __str__(self):
@@ -198,3 +200,47 @@ class Balance(models.Model):
     class Meta:
         verbose_name = "Balance"
         verbose_name_plural = "Balances"
+        
+        
+        
+class AccountPayments(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('paid', 'Paid'),
+        ('failed', 'Failed'),
+    ]
+    
+    ACTION_TYPES = [
+        ('subscription', 'Subscription Payment'),
+        ('balance_topup', 'Balance Top-up'),
+    ]
+    
+    PAYMENT_SOURCE_CHOICES = [
+        ('card', 'Card'),
+        ('wallet', 'Wallet'),
+    ]
+    
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="payments")
+    order_id = models.CharField(max_length=255, verbose_name="Order ID")
+    action_type = models.CharField(max_length=20, choices=ACTION_TYPES, default='subscription')
+    payment_source = models.CharField(max_length=10, choices=PAYMENT_SOURCE_CHOICES, default='card')
+    first_name = models.CharField(max_length=100, verbose_name="First Name")
+    last_name = models.CharField(max_length=100, verbose_name="Last Name")
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_date = models.DateTimeField(auto_now_add=True)
+    description = models.CharField(max_length=255, blank=True, null=True)
+    
+    
+    @property
+    def get_payment_type_display(self):
+        return dict(self.PAYMENT_SOURCE_CHOICES).get(self.payment_source, self.payment_source)
+    
+    class Meta:
+        ordering = ['-payment_date']
+        verbose_name = "Account Payment"
+        verbose_name_plural = "Account Payments"
+    
+    def __str__(self):
+        return f"{self.account.username} - Payment: {self.amount} on {self.payment_date.strftime('%Y-%m-%d %H:%M:%S')}" 
+

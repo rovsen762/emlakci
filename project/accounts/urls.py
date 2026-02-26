@@ -1,5 +1,5 @@
 from .views import register,user_login,forgot_password,verify_forgot_password_otp,reset_password,user_logout,verify_register_otp,\
-    customer_list, customer_details,profile,customer_grid
+    customer_list, customer_details,profile,customer_grid,settings,transactions
 
 from django.urls import path
 
@@ -16,4 +16,6 @@ urlpatterns = [
     path('customer-grid/', customer_grid, name='customer-grid'),
     path('customer-details/<int:customer_id>/', customer_details, name='customer-details'),
     path('profile/', profile, name='profile'),
+    path('settings/', settings, name='settings'),
+    path('transactions/', transactions, name='transactions'),
 ]

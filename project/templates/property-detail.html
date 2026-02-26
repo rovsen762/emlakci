@@ -14,21 +14,10 @@
                 
                 <div class="page-title-head d-flex align-items-center gap-2">
                     <div class="flex-grow-1">
-                        <h4 class="fs-17 mb-0">Property Detail</h4>
-                    </div>
-
-                    <div class="text-end">
-                        <ol class="breadcrumb m-0 py-0 fs-13">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Zircos</a></li>
-                            
-                            <li class="breadcrumb-item active">Property Detail</li>
-                        </ol>
+                        <h4 class="fs-17 mb-0">Əmlak məlumatları</h4>
                     </div>
                 </div>
                 
-
-                
-
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8">
@@ -36,50 +25,57 @@
                                 <h4 class="card-title mb-2">Photos</h4>
                                 <!-- Crossfade -->
                                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    
                                     <div class="carousel-inner shadow" role="listbox">
+                                        
+                                        {% if property.image %}
                                         <div class="carousel-item text-center active">
-                                            <img src="assets/images/properties/3.jpg" alt="" class="img-fluid bg-body img-thumbnail">
+                                            <img src="{{ property.image.url }}" 
+                                                class="img-fluid bg-body img-thumbnail"
+                                                alt="{{ property.title }}">
                                         </div>
-                                        <div class="carousel-item text-center">
-                                            <img src="assets/images/properties/2.jpg" alt="" class="img-fluid bg-body img-thumbnail">
+                                        {% endif %}
+
+                                        {% for image in property.images.all %}
+                                        <div class="carousel-item text-center {% if not property.image and forloop.first %}active{% endif %}">
+                                            <img src="{{ image.image.url }}" 
+                                                class="img-fluid bg-body img-thumbnail"
+                                                alt="{{ property.title }}">
                                         </div>
-                                        <div class="carousel-item text-center">
-                                            <img src="assets/images/properties/1.jpg" alt="" class="img-fluid bg-body img-thumbnail">
-                                        </div>
-                                        <div class="carousel-item text-center">
-                                            <img src="assets/images/properties/4.jpg" alt="" class="img-fluid bg-body img-thumbnail">
-                                        </div>
-                                        <div class="carousel-item text-center">
-                                            <img src="assets/images/properties/5.jpg" alt="" class="img-fluid bg-body img-thumbnail">
-                                        </div>
+                                        {% endfor %}
+                                        
                                     </div>
 
                                     <div class="carousel-indicators m-0 mt-2 d-lg-flex d-none position-static h-100 rounded gap-1">
-                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" class="h-auto rounded bg-light-subtle border active" style="width: auto !important;">
-                                            <img src="assets/images/properties/3.jpg" class="d-block rounded img-fluid">
+                                        
+                                        {% if property.image %}
+                                        <button type="button"
+                                                data-bs-target="#carouselExampleFade"
+                                                data-bs-slide-to="0"
+                                                class="active h-auto rounded bg-light-subtle border">
+                                            <img src="{{ property.image.url }}" class="d-block rounded img-fluid">
                                         </button>
-                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="1" aria-label="Slide 2" class="h-auto rounded bg-light-subtle border" style="width: auto !important;">
-                                            <img src="assets/images/properties/2.jpg" class="d-block rounded img-fluid">
+                                        {% endif %}
+
+                                        {% for image in property.images.all %}
+                                        <button type="button"
+                                                data-bs-target="#carouselExampleFade"
+                                                data-bs-slide-to="{% if property.image %}{{ forloop.counter }}{% else %}{{ forloop.counter0 }}{% endif %}"
+                                                class="h-auto rounded bg-light-subtle border">
+                                            <img src="{{ image.image.url }}" class="d-block rounded img-fluid">
                                         </button>
-                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="2" aria-label="Slide 3" class="h-auto rounded bg-light-subtle border" style="width: auto !important;">
-                                            <img src="assets/images/properties/1.jpg" class="d-block rounded img-fluid">
-                                        </button>
-                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="3" aria-label="Slide 4" class="h-auto rounded bg-light-subtle border" style="width: auto !important;">
-                                            <img src="assets/images/properties/4.jpg" class="d-block rounded img-fluid">
-                                        </button>
-                                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="4" aria-label="Slide 1" class="h-auto rounded bg-light-subtle border" style="width: auto !important;">
-                                            <img src="assets/images/properties/5.jpg" class="d-block rounded img-fluid">
-                                        </button>
+                                        {% endfor %}
+                                        
                                     </div>
+
                                 </div>
                             </div>
                             <!-- end slider -->
 
                             <div class="card card-body">
                                 <h4>{{ property.title }}</h4>
-                                <p class="text-muted"><i class="ti ti-map-pin me-2"></i>245 E 20th St, New York, NY 201609</p>
-
-                                <p class="text-muted mb-4">{{property.description}}</p>
+                                <p class="text-muted"><i class="ti ti-map-pin me-2"></i>{{ property.location.area.name }}, {{ property.location.street.name }}</p>
+                                <p class="text-muted mb-4">{{property.description|linebreaks}}</p>
 
                                 <h4 class="mb-3">General Amenities</h4>
 
@@ -91,24 +87,6 @@
                                             </li>
                                             <li class="mb-2 fs-15">
                                                 <i class="ti ti-circle-check text-success me-1 fs-16"></i> Air conditioning
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Internet
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Radio
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Balcony
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Roof terrace
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Cable TV
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Electricity
                                             </li>
                                         </ul>
                                     </div>
@@ -122,21 +100,6 @@
                                             <li class="mb-2 fs-15">
                                                 <i class="ti ti-circle-check text-success me-1 fs-16"></i> Coffee pot
                                             </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Oven
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Towelwes
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Computer
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Grill
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Parquet
-                                            </li>
                                         </ul>
                                     </div>
                                     <!--- end col -->
@@ -149,21 +112,6 @@
                                             </li>
                                             <li class="mb-2 fs-15">
                                                 <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near Green Zone
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near Church
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near Hospital
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near School
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Near Shop
-                                            </li>
-                                            <li class="mb-2 fs-15">
-                                                <i class="ti ti-circle-check text-success me-1 fs-16"></i> Natural Gas
                                             </li>
                                         </ul>
                                     </div>
@@ -183,36 +131,19 @@
                         <div class="col-lg-4">
                             <div class="text-center card card-body">
                                 <div class="text-start">
-                                    <h4 class="card-title mb-4">Agent</h4>
+                                    <h4 class="card-title mb-4">Elan sahibi</h4>
                                 </div>
                                 <div class="member-card">
-                                    <div class="avatar-xl position-relative mb-2 mx-auto d-block">
-                                        <img src="assets/images/users/avatar-4.jpg" class="rounded-circle img-thumbnail" alt="profile-image">
-                                        <i class="ti ti-star-filled position-absolute top-0 end-0 bg-white rounded-circle shadow text-success border" style="padding: 4px;"></i>
-                                    </div>
 
                                     <div class="mb-2">
-                                        <h5 class="fs-18 mb-1">Mark McKnight</h5>
-                                        <p class="fs-14">
-                                            <i class="ti ti-star-filled text-warning"></i>
-                                            <i class="ti ti-star-filled text-warning"></i>
-                                            <i class="ti ti-star-filled text-warning"></i>
-                                            <i class="ti ti-star-filled text-warning"></i>
-                                            <i class="ti ti-star-filled text-warning"></i>
-                                            <span>(29)</span>
-                                        </p>
+                                        <h5 class="fs-18 mb-1">{{ property.propertyist_name }}</h5>
                                     </div>
 
                                     <div class="mt-4">
                                         <ul class="list-inline">
-                                            <li class="list-inline-item border-end px-3">
-                                                <h4>84</h4>
-                                                <p>Listed Properties</p>
-                                            </li>
-
-                                            <li class="list-inline-item px-3">
-                                                <h4>58</h4>
-                                                <p>Sale Properties</p>
+                                            <li class="list-inline-item me-3">
+                                                <h4>{{ property.propertyist_phone }}</h4>
+                                                <p>Əlaqə nömrəsi</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -225,54 +156,58 @@
                             <!-- end card-box -->
 
                             <div class="card card-body">
-                                <h4 class="card-title mb-2">Property Details</h4>
-
+                                <h4 class="card-title mb-2">Əmlak məlumatları</h4>
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Price:</th>
-                                                <td>$390,000</td>
+                                                <th scope="row">Qiymət:</th>
+                                                <td>{{ property.price }} AZN</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Contract type: </th>
-                                                <td><span class="label label-danger">For Sale</span></td>
+                                                <th scope="row">Satış/Kirayə ?: </th>
+                                                {% if property.is_sale %}
+                                                <td><span class="label label-danger">Satış</span></td>
+                                                {% else %}
+                                                <td><span class="label label-success">Kirayə</span></td>
+                                                {% endif %}
                                             </tr>
                                             <tr>
-                                                <th scope="row">Bathrooms:</th>
-                                                <td>1.5</td>
+                                                <th scope="row">Otaq sayı:</th>
+                                                <td>{{ property.room_count }}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Square ft:</th>
-                                                <td>468</td>
+                                                <th scope="row">Sahəsi</th>
+                                                <td>{{ property.square }} m²</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Garage Spaces:</th>
-                                                <td>2</td>
+                                                <th scope="row">Çıarış:</th>
+                                                <td>{{ property.document_type }}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Land Size:</th>
-                                                <td>721 m²</td>
+                                                <th scope="row">Təmirlidir:</th>
+                                                {% if property.renovation %}
+                                                <td><span class="label label-success">Bəli</span></td>
+                                                {% else %}
+                                                <td><span class="label label-danger">Yox</span></td>
+                                                {% endif %}
+                                                
                                             </tr>
                                             <tr>
-                                                <th scope="row">Floors:</th>
-                                                <td>2</td>
+                                                <th scope="row">Mərtəbə:</th>
+                                                <td>{{ property.floor }}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Listed for:</th>
-                                                <td>15 days</td>
+                                                <th scope="row">Tapılma tarixi:</th>
+                                                <td>{{ property.created_at|date:"d.m.Y" }}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Available:</th>
-                                                <td>Immediately</td>
+                                                <th scope="row">Elan linki:</th>
+                                                <td><a href="{{ property.url }}" target="_blank">Orjinal elana bax</a></td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Pets:</th>
-                                                <td>Pets Allowed</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Bedrooms:</th>
-                                                <td>3</td>
+                                                <th scope="row">Mənbə:</th>
+                                                <td>{{ property.source.source_name }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -15,3 +15,9 @@ def property_list(request):
 def property_detail(request, pk):
     property = Property.objects.get(pk=pk)
     return render(request, 'property-detail.html', {'property': property})
+
+
+@login_required
+def property_grid(request):
+    properties = Property.objects.all().order_by('-created_at')
+    return render(request, 'property-grid.html', {'properties': properties})

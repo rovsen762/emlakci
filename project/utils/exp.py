@@ -176,13 +176,17 @@
 
 
 
-from bs4 import BeautifulSoup
-import requests
+# from bs4 import BeautifulSoup
+# import requests
 
 
-# url = "https://www.emlak.az/804087-satilir-4-otaqli-171-m2-yeni-tikili-28-may-m.html"
+# url = "https://bina.az/items/5881944"
 # def get_data(url):
-#     response = requests.get(url)
+    
+#     headers = {
+#         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+#     }   
+#     response = requests.get(url, headers=headers)
 #     soup = BeautifulSoup(response.text, 'html.parser')
 
 #     div_title = soup.find('div', class_='panel clearfix')
@@ -194,37 +198,37 @@ import requests
 #     meta_name_description = soup.find('meta', attrs={'name': 'description'})
 #     print("Meta Name Description:", meta_name_description['content'] if meta_name_description else "Yoxdur")
     
-#     # print(soup.prettify())
+    # print(soup.prettify())
     
-url = "https://emlak.az/elanlar/?ann_type=1&tip[]=1"
+# url = "https://emlak.az/elanlar/?ann_type=1&tip[]=1"
     
-base_url = "https://emlak.az"
-def get_all_links(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+# base_url = "https://emlak.az"
+# def get_all_links(url):
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.text, 'html.parser')
 
-    links = []
+#     links = []
     
     
     
-    ticked_list_class = soup.find('div', class_='ticket-list')
-    if ticked_list_class:
-        inner_divs = ticked_list_class.find_all('div', class_='ticket clearfix pinned')
-        if inner_divs:
-            for inner_div in inner_divs:
-                h6_class = inner_div.find('h6', class_='title')
-                if h6_class:
-                    a_tag = h6_class.find('a')
-                    if a_tag and 'href' in a_tag.attrs:
-                        link = a_tag['href']
-                        link = base_url + link
-                        links.append(link)
-                        print(link)
-        else:
-            print("Inner div with class 'ticket clearfix pinned' not found.")
+#     ticked_list_class = soup.find('div', class_='ticket-list')
+#     if ticked_list_class:
+#         inner_divs = ticked_list_class.find_all('div', class_='ticket clearfix pinned')
+#         if inner_divs:
+#             for inner_div in inner_divs:
+#                 h6_class = inner_div.find('h6', class_='title')
+#                 if h6_class:
+#                     a_tag = h6_class.find('a')
+#                     if a_tag and 'href' in a_tag.attrs:
+#                         link = a_tag['href']
+#                         link = base_url + link
+#                         links.append(link)
+#                         print(link)
+#         else:
+#             print("Inner div with class 'ticket clearfix pinned' not found.")
 
 if __name__ == "__main__":
-    get_all_links(url)
+    get_data(url)
 
 
 

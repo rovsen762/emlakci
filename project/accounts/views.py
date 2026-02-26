@@ -1,6 +1,5 @@
 
-from .models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries
-import email
+from .models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries,Balance, PreferryPriority, AccountFilterMatch, Subscription, AccountPayments
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AccountCreationForm, LoginForm, ForgotPasswordForm, VerifyForgotPasswordOtpForm, ResetPasswordForm,VerifyRegisterOtpForm
 from django.contrib.auth import authenticate, login, logout
@@ -299,11 +298,42 @@ def customer_details(request, customer_id):
 @login_required(login_url='login')
 def profile(request):
     account = request.user
+    account_payments = AccountPayments.objects.filter(account=account).order_by('-payment_date')
     context = {
-        'account': account
+        'account': account,
+        'account_payments': account_payments
     }
     return render(request, 'profile.html', context)
 
+
+@login_required(login_url='login')
+def settings(request):
+    account = request.user
+    # if request.method == 'POST':
+    #     form = AccountUpdateForm(request.POST, request.FILES, instance=account)
+    #     if form.is_valid():
+    #         form.save()
+    #         messages.success(request, "Profiliniz uğurla güncellendi.")
+    #         return redirect('settings')
+    # else:
+    #     form = AccountUpdateForm(instance=account)
+
+    context = {
+        'account': account,
+    }
+    return render(request, 'settings.html', context)
+
+
+
+@login_required(login_url='login')
+def transactions(request):
+    account = request.user
+    account_payments = AccountPayments.objects.filter(account=account).order_by('-payment_date')
+    context = {
+        'account': account,
+        'account_payments': account_payments
+    }
+    return render(request, 'transactions.html', context)
 
 
 

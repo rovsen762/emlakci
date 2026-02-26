@@ -1,8 +1,9 @@
-from .views import property_list,property_detail
+from .views import property_list, property_grid, property_detail
 
 from django.urls import path
 
 urlpatterns = [
-    path('list/', property_list, name='property-list'),
-    path('detail/<int:pk>/', property_detail, name='property-detail'),
+    path('property-list/', property_list, name='property-list'),
+    path('property-grid/', property_grid, name='property-grid'),
+    path('property-detail/<int:pk>/', property_detail, name='property-detail'),
 ]

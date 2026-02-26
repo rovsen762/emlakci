@@ -93,6 +93,7 @@ class PropertySource(models.Model):
         
         
 class Property(models.Model):
+    url = models.URLField(verbose_name="Property URL", null=True, blank=True)
     title = models.CharField(max_length=255, verbose_name="Property Title")
     description = models.TextField(verbose_name="Property Description")
     price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Property Price")
@@ -100,15 +101,17 @@ class Property(models.Model):
     is_sale = models.BooleanField(default=False, verbose_name="Is Sale?")
     is_rent = models.BooleanField(default=False, verbose_name="Is Rent?")
     image=models.ImageField(upload_to=logo_dir_path, null=True, blank=True, verbose_name="Property Image")
-    property_area = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Property Area")
+    square = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Property Area")
     document_type = models.CharField(max_length=255, null=True, blank=True, verbose_name="Document Type")
     is_documented = models.BooleanField(default=False, verbose_name="Documented?")
     have_things = models.BooleanField(default=False, verbose_name="Have things?")
+    renovation = models.BooleanField(default=False, verbose_name="Renovation?")
     communal = models.BooleanField(default=False, verbose_name="Communal?")
     floor = models.IntegerField(null=True, blank=True, verbose_name="Floor")
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, related_name="properties", verbose_name="Property Location")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="properties", verbose_name="Preferred Category")
     propertyist_phone = models.CharField(max_length=20, null=True, blank=True, verbose_name="Propertyist Phone")
+    propertyist_name = models.CharField(max_length=255, null=True, blank=True, verbose_name="Propertyist Name")
     source = models.ForeignKey(PropertySource, on_delete=models.CASCADE, related_name="properties", verbose_name="Property Source")
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
@@ -130,6 +133,17 @@ class Property(models.Model):
         ]
         
         
+class PropertyImages(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="images", verbose_name="Property")
+    image = models.ImageField(upload_to=logo_dir_path, null=True, blank=True, verbose_name="Property Image")
+    
+    def __str__(self):
+        return f"Image for {self.property.title}"
+    
+    class Meta:
+        verbose_name = "Property Image"
+        verbose_name_plural = "Property Images"
+        
         
 class Notification(models.Model):
     account = models.ForeignKey("accounts.Account",on_delete=models.CASCADE)
@@ -141,7 +155,7 @@ class Notification(models.Model):
     retry_count = models.IntegerField(default=0)
     error_message = models.TextField(null=True, blank=True)
     score = models.IntegerField(default=0)
-    also_sendto_customer = models.BooleanField(default=False)
+    also_send_to_customer = models.BooleanField(default=False)
     
     def __str__(self):
         return f"Notification for {self.account.email} - Property: {self.property.title}"

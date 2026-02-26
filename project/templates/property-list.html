@@ -39,7 +39,7 @@
                                              </div>
                                              <div>
                                                   <div class="avatar-md bg-primary bg-opacity-10 rounded">
-                                                       <iconify-icon icon="solar:wallet-money-broken" class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       <i class="ti ti-wallet fs-32 text-primary avatar-title"></i>
                                                   </div>
                                              </div>
                                         </div>
@@ -64,7 +64,7 @@
                                              </div>
                                              <div>
                                                   <div class="avatar-md bg-primary bg-opacity-10 rounded">
-                                                       <iconify-icon icon="solar:home-broken" class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       <i class="ti ti-home fs-32 text-primary avatar-title"></i>
                                                   </div>
                                              </div>
                                         </div>
@@ -90,7 +90,7 @@
                                              </div>
                                              <div>
                                                   <div class="avatar-md bg-primary bg-opacity-10 rounded">
-                                                       <iconify-icon icon="solar:dollar-broken" class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       <i class="ti ti-currency-dollar fs-32 text-primary avatar-title"></i>
                                                   </div>
                                              </div>
                                         </div>
@@ -115,7 +115,7 @@
                                              </div>
                                              <div>
                                                   <div class="avatar-md bg-primary bg-opacity-10 rounded">
-                                                       <iconify-icon icon="solar:key-minimalistic-square-broken" class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                       <i class="ti ti-key fs-32 text-primary avatar-title"></i>
                                                   </div>
                                              </div>
                                         </div>
@@ -186,7 +186,7 @@
                                                                       <img src="{{ property.image.url }}" alt="" class="avatar-md rounded border border-light border-3">
                                                                  </div>
                                                                  <div>
-                                                                      <a href="#!" class="text-dark fw-medium fs-15">{{property.title}}</a>
+                                                                      <a href="{% url 'property-detail' property.id %}" class="text-dark fw-medium fs-15">{{property.title}}</a>
                                                                  </div>
                                                             </div>
 
@@ -206,13 +206,8 @@
                                                        <td>
                                                        <div class="d-flex gap-2">
                                                             <!-- Detail (Eye) -->
-                                                            <a href="#!" class="btn btn-light btn-sm">
+                                                            <a href="{% url 'property-detail' property.id %}" class="btn btn-light btn-sm">
                                                                  <i class="ti ti-eye fs-18 align-middle"></i>
-                                                            </a>
-
-                                                            <!-- Edit -->
-                                                            <a href="#!" class="btn btn-soft-primary btn-sm">
-                                                                 <i class="ti ti-edit fs-18 align-middle"></i>
                                                             </a>
 
                                                             <!-- Delete -->
