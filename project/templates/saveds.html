@@ -1,0 +1,358 @@
+{% extends 'partials/_base.html' %}
+
+{% load static %}
+
+
+{% block content %} 
+
+
+
+
+<!-- ==================================================== -->
+          <!-- Start right Content here -->
+          <!-- ==================================================== -->
+          <div class="page-content">
+               
+               <!-- Start Container Fluid -->
+               <div class="container-fluid">
+
+                    <!-- ========== Page Title Start ========== -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                              <br>
+                                <h4 class="mb-0 fw-semibold">Yadda saxlanılmışlar</h4>
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Real Estate</a></li>
+                                    <li class="breadcrumb-item active">Saved Properties</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ========== Page Title End ========== -->
+
+                    <div class="row">
+                         <div class="col-xl-3 col-lg-12">
+                              <div class="card">
+                                   <div class="card-header border-bottom">
+                                        <div>
+                                             <h4 class="card-title">Properties</h4>
+                                             <p class="mb-0">Show 15,780 Properties</p>
+                                        </div>
+                                   </div>
+                                   <div class="card-body border-light">
+                                        <form>
+                                             <label for="choices-single-groups" class="form-label">Properties Location</label>
+                                             <select class="form-control" id="choices-single-groups" data-choices data-choices-groups data-placeholder="Select City" name="choices-single-groups">
+                                                  <option value="">Choose a city</option>
+                                                  <optgroup label="UK">
+                                                       <option value="London">London</option>
+                                                       <option value="Manchester">Manchester</option>
+                                                       <option value="Liverpool">Liverpool</option>
+                                                  </optgroup>
+                                                  <optgroup label="FR">
+                                                       <option value="Paris">Paris</option>
+                                                       <option value="Lyon">Lyon</option>
+                                                       <option value="Marseille">Marseille</option>
+                                                  </optgroup>
+                                                  <optgroup label="DE" disabled>
+                                                       <option value="Hamburg">Hamburg</option>
+                                                       <option value="Munich">Munich</option>
+                                                       <option value="Berlin">Berlin</option>
+                                                  </optgroup>
+                                                  <optgroup label="US">
+                                                       <option value="New York">New York</option>
+                                                       <option value="Washington" disabled>Washington</option>
+                                                       <option value="Michigan">Michigan</option>
+                                                  </optgroup>
+                                                  <optgroup label="SP">
+                                                       <option value="Madrid">Madrid</option>
+                                                       <option value="Barcelona">Barcelona</option>
+                                                       <option value="Malaga">Malaga</option>
+                                                  </optgroup>
+                                                  <optgroup label="CA">
+                                                       <option value="Montreal">Montreal</option>
+                                                       <option value="Toronto">Toronto</option>
+                                                       <option value="Vancouver">Vancouver</option>
+                                                  </optgroup>
+                                             </select>
+
+                                             <div class="mb-3">
+                                                  <label for="typeplace" class="form-label">Type Of Place</label>
+                                                  <input type="text" id="typeplace" class="form-control">
+                                             </div>
+                                        </form>
+                                        <h5 class="text-dark fw-medium my-3">Custom Price Range :</h5>
+                                        <div id="product-price-range" [data-slider-size="md" ] class=""></div>
+                                        <div class="formCost d-flex gap-2 align-items-center mt-3">
+                                             <input class="form-control form-control-sm text-center" type="text" id="minCost" value="0">
+                                             <span class="fw-semibold text-muted">to</span>
+                                             <input class="form-control form-control-sm text-center" type="text" id="maxCost" value="1000">
+                                        </div>
+                                        <h5 class="text-dark fw-medium my-3">Accessibility Features :</h5>
+                                        <div class="row g-1">
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck11">
+                                                       <label class="form-check-label ms-1" for="defaultCheck11">
+                                                            For Rent
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck12">
+                                                       <label class="form-check-label ms-1" for="defaultCheck12">
+                                                            For Sale
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <h5 class="text-dark fw-medium my-3">Properties Type :</h5>
+                                        <div class="row g-1">
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck" checked>
+                                                       <label class="form-check-label ms-1" for="defaultCheck">
+                                                            All Properties
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Cottage
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Villas
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Apartment
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Duplex Bungalow
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <h5 class="text-dark fw-medium my-3">Bedrooms :</h5>
+                                        <div class="" role="group" aria-label="Basic checkbox toggle button group">
+                                             <input type="checkbox" class="btn-check" id="btncheck1">
+                                             <label class="btn btn-outline-primary" for="btncheck1">1 BHK</label>
+
+                                             <input type="checkbox" class="btn-check" id="btncheck2">
+                                             <label class="btn btn-outline-primary" for="btncheck2">2 BHK</label>
+
+                                             <input type="checkbox" class="btn-check" id="btncheck3" checked>
+                                             <label class="btn btn-outline-primary" for="btncheck3">3 BHK</label>
+
+                                             <input type="checkbox" class="btn-check" id="btncheck4">
+                                             <label class="btn btn-outline-primary my-1" for="btncheck4">4 & 5 BHK</label>
+
+                                        </div>
+                                        <h5 class="text-dark fw-medium my-3">Accessibility Features :</h5>
+                                        <div class="row g-1">
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Balcony
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Parking
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Spa
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck8">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Pool
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck9">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Restaurant
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                             <div class="col-lg-6">
+                                                  <div class="mb-2">
+                                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
+                                                       <label class="form-check-label ms-1" for="defaultCheck1">
+                                                            Fitness Club
+                                                       </label>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="card-footer">
+                                        <a href="#!" class="btn btn-primary w-100">Apply</a>
+                                   </div>
+                              </div>
+                         </div>
+
+                         <div class="col-xl-9 col-lg-12">
+                              <div class="row">
+                                   {% for property in saved_properties %}
+                                   <div class="col-lg-4 col-md-6">
+                                        <div class="card overflow-hidden">
+                                             <div class="position-relative">
+                                                  <img src="{{ property.image.url }}" alt="" class="img-fluid rounded-top">
+                                                  <span class="position-absolute top-0 start-0 p-1">
+                                                       <button type="button" 
+                                                            class="btn btn-warning avatar-sm d-inline-flex align-items-center justify-content-center fs-20 rounded text-light">
+                                                       <i class="ti ti-bookmark fs-18 align-middle"></i>
+                                                       </button>
+                                                  </span>
+                                                  {% if property.is_sale %}
+                                                  <span class="position-absolute top-0 end-0 p-1">
+                                                       <span class="badge bg-success text-white fs-13">Satış</span>
+                                                  </span>
+                                                  {% else%}
+
+                                                  <span class="position-absolute top-0 end-0 p-1">
+                                                       <span class="badge bg-primary text-white fs-13">Kirayə</span>
+                                                  </span>
+                                                  {% endif %}
+                                             </div>
+                                             <div class="card-body">
+                                                  <div class="d-flex align-items-center gap-2">
+                                                       <div class="avatar bg-light rounded">
+                                                            {% if property.category.name == "Bağ evi" %}
+                                                            <i class="ti ti-home fs-24 text-primary avatar-title"></i>
+                                                            {% elif property.category.name == "Mənzil" %}
+                                                            <i class="ti ti-building fs-24 text-primary avatar-title"></i>
+                                                            {% else %}
+                                                            <i class="ti ti-building fs-24 text-primary avatar-title"></i>
+                                                            {% endif %}
+                                                       </div>
+                                                       <div>
+                                                            <a href="{% url 'property-detail' property.pk %}" class="text-dark fw-medium fs-16">{{ property.title }}</a>
+                                                            <p class="text-muted mb-0">{{property.location.area.name}}</p>
+                                                       </div>
+                                                  </div>
+                                                  <div class="row mt-2 g-2">
+                                                       
+                                                       <div class="col-lg-4 col-4">
+                                                            <span class="badge bg-light-subtle text-muted border fs-12 d-flex align-items-center gap-1">
+                                                                 <i class="ti ti-door fs-16"></i>
+                                                                 {{ property.room_count }} Otaq
+                                                            </span>
+                                                       </div>
+
+                                                       <div class="col-lg-4 col-4">
+                                                            <span class="badge bg-light-subtle text-muted border fs-12 d-flex align-items-center gap-1">
+                                                                 <i class="ti {% if property.is_sale %}ti-cash{% else %}ti-key{% endif %} fs-16"></i>
+                                                                 {% if property.is_sale %}Satış{% elif property.is_rent %}Kirayə{% endif %}
+                                                            </span>
+                                                       </div>
+
+                                                       <div class="col-lg-4 col-4">
+                                                            <span class="badge bg-light-subtle text-muted border fs-12 d-flex align-items-center gap-1">
+                                                                 <i class="ti ti-ruler-measure fs-16"></i>
+                                                                 {{ property.square|floatformat:-2 }} m²
+                                                            </span>
+                                                       </div>
+
+                                                       <div class="col-lg-4 col-4">
+                                                            <span class="badge bg-light-subtle text-muted border fs-12 d-flex align-items-center gap-1">
+                                                                 <i class="ti {% if property.is_documented %}ti-file-check{% else %}ti-file-x{% endif %} fs-16"></i>
+                                                                 {% if property.is_documented %}Sənədli{% else %}Sənədsiz{% endif %}
+                                                            </span>
+                                                       </div>
+
+                                                       <div class="col-lg-4 col-4">
+                                                            <span class="badge bg-light-subtle text-muted border fs-12 d-flex align-items-center gap-1">
+                                                                 <i class="ti {% if property.renovation %}ti-paint{% else %}ti-home-off{% endif %} fs-16"></i>
+                                                                 {% if property.renovation %}Təmirli{% else %}Təmirsiz{% endif %}
+                                                            </span>
+                                                       </div>
+                                                  </div>
+
+                                             </div>
+                                             <br>
+                                             <div class="card-footer bg-light-subtle d-flex justify-content-between align-items-center border-top">
+                                                  <p class="fw-medium text-dark fs-16 mb-0">{{ property.price|floatformat:-2 }} AZN </p>
+                                                  <div>
+                                                       <a href="{% url 'property-detail' property.id %}" class="link-primary fw-medium">Bax<i class='ri-arrow-right-line align-middle'></i></a>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   {% endfor %}
+                              </div>
+
+                              <div class="p-3 border-top">
+                                   <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-end mb-0">
+                                             <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+                                             <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                             <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                             <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                             <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                        </ul>
+                                   </nav>
+                              </div>
+                         </div>
+                    </div>                   
+               </div>
+               <!-- End Container Fluid -->
+
+               <!-- ========== Footer Start ========== -->
+               <footer class="footer">
+                   <div class="container-fluid">
+                       <div class="row">
+                           <div class="col-12 text-center">
+                               <script>document.write(new Date().getFullYear())</script> &copy; Lahomes. Crafted by <iconify-icon icon="solar:hearts-bold-duotone" class="fs-18 align-middle text-danger"></iconify-icon> <a
+                                   href="https://1.envato.market/techzaa" class="fw-bold footer-text" target="_blank">Techzaa</a>
+                           </div>
+                       </div>
+                   </div>
+               </footer>
+               <!-- ========== Footer End ========== -->
+
+          </div>
+          <!-- ==================================================== -->
+          <!-- End Page Content -->
+          <!-- ==================================================== -->
+
+
+
+
+
+
+
+{% endblock %}

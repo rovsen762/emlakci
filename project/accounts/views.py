@@ -338,11 +338,28 @@ def transactions(request):
 
 
 
+@login_required(login_url='login')
+def transaction_details(request, payment_id):
+    account = request.user
+    payment = get_object_or_404(AccountPayments, id=payment_id, account=account)
+    context = {
+        'account': account,
+        'transaction': payment
+    }
+    return render(request, 'transaction-details.html', context)
 
 
 
 
-
+# @login_required
+# def saveds(request):
+#     account = request.user
+#     saved_properties = account.saveds.all()
+#     context = {
+#         'account': account,
+#         'saved_properties': saved_properties
+#     }
+#     return render(request, 'saveds.html', context)
 
 
 

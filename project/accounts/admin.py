@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .models import Account, Plan, AccountCustomers, AccountFilters, AccountCustomerPreferries,Balance, PreferryPriority,\
-    AccountFilterMatch, Subscription, AccountPayments
+    AccountFilterMatch, Subscription, AccountPayments,PromoCodes
 
 admin.site.register(Plan)
 admin.site.register(AccountCustomers)
@@ -13,7 +13,8 @@ admin.site.register(PreferryPriority)
 admin.site.register(AccountFilterMatch)
 admin.site.register(Subscription)   
 admin.site.register(AccountPayments)
-
+admin.site.register(PromoCodes)
+# admin.site.register(Saved)
 
 
 

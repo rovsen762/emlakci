@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">
-                                <h4 class="mb-0 fw-semibold">Transactions</h4>
+                                <h4 class="mb-0 fw-semibold">Ödəmələrim</h4>
                                 <ol class="breadcrumb mb-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Real Estate</a></li>
                                     <li class="breadcrumb-item active">Transactions</li>
@@ -32,7 +32,7 @@
                               <div class="card">
                                    <div class="card-header d-flex justify-content-between align-items-center border-bottom">
                                         <div>
-                                             <h4 class="card-title">All Transactions List</h4>
+                                             <h4 class="card-title">Ödəmələrim</h4>
                                         </div>
                                         <div class="dropdown">
                                              <a href="#" class="dropdown-toggle btn btn-sm btn-outline-light rounded" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,18 +60,19 @@
                                                                       <label class="form-check-label" for="customCheck1"></label>
                                                                  </div>
                                                             </th>
-                                                            <th>Transactions ID</th>
-                                                            <th>Customer Photo & Name</th>
-                                                            <th>Date</th>
-                                                            <th>Amount</th>
-                                                            <th>Payment Method</th>
-                                                            <th>Agent Name</th>
-                                                            <th>Invested Property</th>
+                                                            <th>Ödəniş ID</th>
+                                                            <th>Tarix</th>
+                                                            <th>Məbləğ</th>
+                                                            <th>Ödəniş Üsulu</th>
                                                             <th>Status</th>
-                                                            <th>Action</th>
+                                                            <th>Əməliyyat</th>
+                                                            <th>Çeki yüklə</th>
+                                                            <th>Sil</th>
+                                                            
                                                        </tr>
                                                   </thead>
                                                   <tbody>
+                                                       {% for transaction in account_payments %}
 
                                                        <tr>
                                                             <td>
@@ -80,391 +81,59 @@
                                                                       <label class="form-check-label" for="customCheck2">&nbsp;</label>
                                                                  </div>
                                                             </td>
-                                                            <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-341220</a></td>
                                                             <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <a href="#!" class="rounded-circle">
-                                                                           <div class="position-relative">
-                                                                                <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-sm rounded-circle flex-shrink-0 ">
-                                                                                <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                                     <span class=""><i class="ri-circle-fill fs-10 align-bottom text-success bg-light rounded-circle"></i></span>
-                                                                                </span>
-                                                                           </div>
-                                                                      </a>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Ray C. Nichols</a>
-                                                                      </div>
-                                                                 </div>
+                                                                 <a
+                                                                 href="#"
+                                                                 class="link-primary fw-semibold"
+                                                                 data-bs-toggle="modal"
+                                                                 data-bs-target="#TransactionsViewModal"
+                                                                 data-id="{{ transaction.id }}"
+                                                                 data-date="{{ transaction.payment_date|date:'Y-m-d' }}"
+                                                                 data-amount="{{ transaction.amount }}"
+                                                                 data-source="{{ transaction.payment_source }}"
+                                                                 data-status="{{ transaction.status }}"
+                                                                 >
+                                                                 #{{ transaction.order_id }}
+                                                                 </a>
+                                                            </td>
+                                                            
+                                                            <td>{{transaction.payment_date|date:"Y-m-d"}}</td>
+                                                            <td>{{transaction.amount}} AZN</td>
+                                                            {% if transaction.payment_source == 'card' %}
+                                                                 <td>Kart</td>
+                                                            {% else %}
+                                                                 <td>Balansdan</td>
+                                                            {% endif %}
+                                                            {% if transaction.status == 'paid' %}
+                                                                 <td><span class="badge bg-success-subtle text-success py-1 px-2 fs-12">Ödənmiş</span></td>
+                                                            {% elif transaction.status == 'pending' %}
+                                                                 <td><span class="badge bg-warning-subtle text-warning py-1 px-2 fs-12">Gözləyir</span></td>
+                                                            {% else %}
+                                                                 <td><span class="badge bg-danger-subtle text-danger py-1 px-2 fs-12">Uğursuz</span></td>
+                                                            {% endif %}
 
-                                                            </td>
-                                                            <td>05/01/2023</td>
-                                                            <td>$13,987</td>
+                                                            {% if transaction.action_type == 'subscription' %}
+                                                                 <td><span class="badge bg-primary-subtle text-primary py-1 px-2 fs-12">Abunəlik</span></td>
+                                                            {% else %}
+                                                                 <td><span class="badge bg-primary-subtle text-primary py-1 px-2 fs-12">Balans artımı</span></td>
+                                                            {% endif %}
+                                                            {% if transaction.status == 'paid' %}
                                                             <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <div>
-                                                                           <img src="{% static 'assets/images/card/mastercard.svg' %}" alt="" class="avatar-xs">
-                                                                      </div>
-                                                                      <div>
-                                                                           <p class="text-dark mb-1 fw-medium">Mastercard **** 3467</p>
-                                                                           <p class="mb-0">Card Payment </p>
-                                                                      </div>
-                                                                 </div>
+                                                                 <a href="{% url 'transaction-details' transaction.id %}" class="btn btn-light btn-sm d-inline-flex align-items-center justify-content-center">
+                                                                      <i class="ti ti-receipt fs-18 text-danger"></i>
+                                                                 </a>
                                                             </td>
-                                                            <td>Michael A. Miner</td>
-                                                            <td>W. straat 102 DK Deventer</td>
-                                                            <td><span class="badge bg-success-subtle text-success py-1 px-2 fs-12">Completed</span></td>
+                                                            {% endif %}
+
                                                             <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
+
+                                                                 <a href="#!" class="btn btn-soft-danger btn-sm d-inline-flex align-items-center justify-content-center">
+                                                                      <i class="ti ti-trash fs-18"></i>
+                                                                 </a>
                                                             </td>
+                                                            
                                                        </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-547891</a></td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <a href="#!" class="rounded-circle">
-                                                                           <div class="position-relative">
-                                                                                <img src="assets/images/users/avatar-3.jpg" alt="" class="avatar-sm rounded-circle flex-shrink-0 ">
-                                                                                <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                                     <span class=""><i class="ri-circle-fill fs-10 align-bottom text-success bg-light rounded-circle"></i></span>
-                                                                                </span>
-                                                                           </div>
-                                                                      </a>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Barbara A. Woods</a>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                            <td>14/02/2023</td>
-                                                            <td>$11,345</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <div>
-                                                                           <img src="assets/images/card/visa.svg" alt="" class="avatar-xs">
-                                                                      </div>
-                                                                      <div>
-                                                                           <p class="text-dark mb-1 fw-medium">Visa card **** 4722</p>
-                                                                           <p class="mb-0">Card Payment </p>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                            <td>Theresa T. Brose</td>
-                                                            <td>Isaac Tirionplein 100</td>
-                                                            <td><span class="badge bg-success-subtle text-success py-1 px-2 fs-12">Completed</span></td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-230477</a></td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <a href="#!" class="rounded-circle">
-                                                                           <div class="position-relative">
-                                                                                <img src="assets/images/users/avatar-4.jpg" alt="" class="avatar-sm rounded-circle flex-shrink-0 ">
-                                                                                <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                                     <span class=""><i class="ri-circle-fill fs-10 align-bottom text-danger bg-light rounded-circle"></i></span>
-                                                                                </span>
-                                                                           </div>
-                                                                      </a>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Robert Mendoza</a>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>23/03/2023</td>
-                                                            <td>$16,789</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <div>
-                                                                           <img src="assets/images/card/mastercard.svg" alt="" class="avatar-xs">
-                                                                      </div>
-                                                                      <div>
-                                                                           <p class="text-dark mb-1 fw-medium">Mastercard **** 7263</p>
-                                                                           <p class="mb-0">Card Payment </p>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                            <td>Walter L. Calab</td>
-                                                            <td>123 Maple St, 456 Oak Ave</td>
-                                                            <td><span class="badge bg-danger-subtle text-danger py-1 px-2 fs-12">Canceled</span></td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-189348</a></td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <a href="#!" class="rounded-circle">
-                                                                           <div class="position-relative">
-                                                                                <img src="assets/images/users/avatar-5.jpg" alt="" class="avatar-sm rounded-circle flex-shrink-0 ">
-                                                                                <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                                     <span class=""><i class="ri-circle-fill fs-10 align-bottom text-warning bg-light rounded-circle"></i></span>
-                                                                                </span>
-                                                                           </div>
-                                                                      </a>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Rita Correa</a>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>11/04/2023</td>
-                                                            <td>$14,567</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <div>
-                                                                           <img src="assets/images/card/paypal.svg" alt="" class="avatar-xs">
-                                                                      </div>
-                                                                      <div>
-                                                                           <p class="text-dark mb-1 fw-medium"> gailsoneil31@rhyta.com</p>
-                                                                           <p class="mb-0">Bank Payment </p>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                            <td>Olive Mize</td>
-                                                            <td>3822 DT Amersfoort</td>
-                                                            <td><span class="badge bg-warning-subtle text-warning py-1 px-2 fs-12">Pending</span></td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-765434</a></td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <a href="#!" class="rounded-circle">
-                                                                           <div class="position-relative">
-                                                                                <img src="assets/images/users/avatar-6.jpg" alt="" class="avatar-sm rounded-circle flex-shrink-0 ">
-                                                                                <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                                     <span class=""><i class="ri-circle-fill fs-10 align-bottom text-success bg-light rounded-circle"></i></span>
-                                                                                </span>
-                                                                           </div>
-                                                                      </a>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Beatriz McClure</a>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>30/05/2023</td>
-                                                            <td>$10,234</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <div>
-                                                                           <img src="assets/images/card/visa.svg" alt="" class="avatar-xs">
-                                                                      </div>
-                                                                      <div>
-                                                                           <p class="text-dark mb-1 fw-medium">Visa card **** 8263</p>
-                                                                           <p class="mb-0">Card Payment </p>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                            <td>Christa Sardina</td>
-                                                            <td>3822 DT Amersfoort</td>
-                                                            <td><span class="badge bg-success-subtle text-success py-1 px-2 fs-12">Completed</span></td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-452103 </a></td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <a href="#!" class="rounded-circle">
-                                                                           <div class="position-relative">
-                                                                                <img src="assets/images/users/avatar-7.jpg" alt="" class="avatar-sm rounded-circle flex-shrink-0 ">
-                                                                                <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                                     <span class=""><i class="ri-circle-fill fs-10 align-bottom text-warning bg-light rounded-circle"></i></span>
-                                                                                </span>
-                                                                           </div>
-                                                                      </a>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Luis P. Brick</a>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>19/06/2023</td>
-                                                            <td>$17,890</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <div>
-                                                                           <img src="assets/images/card/paypal.svg" alt="" class="avatar-xs">
-                                                                      </div>
-                                                                      <div>
-                                                                           <p class="text-dark mb-1 fw-medium">hughcrobinson@rhyta.com</p>
-                                                                           <p class="mb-0">Bank Payment </p>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                            <td>Darren Rivera</td>
-                                                            <td>3181 BE Rozenburg</td>
-                                                            <td><span class="badge bg-warning-subtle text-warning py-1 px-2 fs-12">Pending</span></td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-986712</a></td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <a href="#!" class="rounded-circle">
-                                                                           <div class="position-relative">
-                                                                                <img src="assets/images/users/avatar-8.jpg" alt="" class="avatar-sm rounded-circle flex-shrink-0 ">
-                                                                                <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                                     <span class=""><i class="ri-circle-fill fs-10 align-bottom text-success bg-light rounded-circle"></i></span>
-                                                                                </span>
-                                                                           </div>
-                                                                      </a>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Gary Jimenez</a>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>28/07/2023</td>
-                                                            <td>$12,453</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <div>
-                                                                           <img src="assets/images/card/mastercard.svg" alt="" class="avatar-xs">
-                                                                      </div>
-                                                                      <div>
-                                                                           <p class="text-dark mb-1 fw-medium">Mastercard **** 9200</p>
-                                                                           <p class="mb-0">Card Payment </p>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                            <td>Robert V. Leavitt</td>
-                                                            <td>Julianastraat ZX 7031</td>
-                                                            <td><span class="badge bg-success-subtle text-success py-1 px-2 fs-12">Completed</span></td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-324569</a></td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <a href="#!" class="rounded-circle">
-                                                                           <div class="position-relative">
-                                                                                <img src="assets/images/users/avatar-9.jpg" alt="" class="avatar-sm rounded-circle flex-shrink-0 ">
-                                                                                <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                                     <span class=""><i class="ri-circle-fill fs-10 align-bottom text-danger bg-light rounded-circle"></i></span>
-                                                                                </span>
-                                                                           </div>
-                                                                      </a>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Beatrice Ruiz</a>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>07/08/2023</td>
-                                                            <td>$15,678</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <div>
-                                                                           <img src="assets/images/card/visa.svg" alt="" class="avatar-xs">
-                                                                      </div>
-                                                                      <div>
-                                                                           <p class="text-dark mb-1 fw-medium">Visa card **** 8940</p>
-                                                                           <p class="mb-0">Card Payment </p>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                            <td>Lydia Anderson</td>
-                                                            <td>2561 DB Den Haag</td>
-                                                            <td><span class="badge bg-danger-subtle text-danger py-1 px-2 fs-12">Canceled</span></td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
+                                                       {% endfor %}
 
                                                   </tbody>
                                              </table>
@@ -487,98 +156,51 @@
 
                     </div>
                      
-                    <div class="modal fade" id="TransactionsViewModal" tabindex="-1" aria-labelledby="TransactionsViewModalLabel" aria-hidden="true">
-                         <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                   <div class="modal-body">
-                                        <div class="card border-0 mb-0 shadow-none">
-                                             <div class="card-body p-0 pb-3">
-                                                  <div class="d-flex align-items-center gap-3">
-                                                       <a href="#!" class="rounded-circle">
-                                                            <div class="position-relative">
-                                                                 <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-md rounded-circle flex-shrink-0 img-thumbnail">
-                                                                 <span class="position-absolute bottom-0 end-0  rounded-circle">
-                                                                      <span class=""><i class="ri-verified-badge-fill fs-18 align-bottom text-primary bg-light rounded-circle"></i></span>
-                                                                 </span>
-                                                            </div>
-                                                       </a>
-                                                       <div>
-                                                            <a href="#!" class="text-dark fw-semibold fs-18">Ray C. Nichols</a>
-                                                            <p class="mb-0">raycnichols@teleworm.us</p>
-                                                       </div>
-                                                       <div class="ms-auto">
-                                                            <span class="badge bg-primary-subtle text-primary py-1 px-2 fs-12">Premium</span>
-                                                       </div>
-                                                  </div>
-                                                  <div class="p-3 bg-primary bg-gradient rounded-4 mt-4 border border-light border-2 shadow-sm">
-                                                       <div class="d-flex align-items-center">
-                                                            <img src="assets/images/chip.png" alt="" class="avatar">
-                                                            <div class="ms-auto">
-                                                                 <img src="assets/images/card/mastercard.svg" alt="" class="avatar">
-                                                            </div>
-                                                       </div>
-                                                       <div class="mt-5">
+                    <div class="modal fade" id="TransactionsViewModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                         <div class="modal-header">
+                         <h5 class="modal-title">
+                         Transaction #<span id="modalTransactionId"></span>
+                         </h5>
+                         <button
+                         type="button"
+                         class="btn-close"
+                         data-bs-dismiss="modal"
+                         ></button>
+                         </div>
 
-                                                            <h4 class="text-white d-flex gap-2"><span class="text-white-50">XXXX</span> <span class="text-white-50">XXXX</span> <span class="text-white-50">XXXX</span> 3467</h4>
-                                                       </div>
-                                                       <div class="d-flex align-items-center justify-content-between mt-4">
-                                                            <div>
-                                                                 <p class="text-white-50 mb-2">Holder Name</p>
-                                                                 <h4 class="mb-0 text-white">Ray C. Nichols</h4>
-                                                            </div>
-                                                            <div>
-                                                                 <p class="text-white-50 mb-2">Valid</p>
-                                                                 <h4 class="mb-0 text-white">05/26</h4>
-                                                            </div>
-                                                            <img src="assets/images/contactless-payment.png" alt="" class="img-fluid">
-                                                       </div>
-                                                  </div>
-                                                  <div class="mt-4">
-                                                       <h4 class="text-dark fw-medium">Transactions History (2)</h4>
-                                                       <div class="d-flex align-items-center gap-3 mt-3 border p-2 rounded">
-                                                            <div class="avatar bg-primary bg-opacity-10 rounded">
-                                                                 <iconify-icon icon="solar:square-transfer-horizontal-bold" class="fs-28 text-primary avatar-title"></iconify-icon>
-                                                            </div>
-                                                            <div>
-                                                                 <p class="mb-1 text-dark fw-medium fs-15">Michael A. Miner</p>
-                                                                 <p class="text-muted mb-0">michaelminer@dayrep.com</p>
-                                                            </div>
-                                                            <div class="ms-auto">
-                                                                 <p class="mb-1 fs-16 text-dark fw-medium">$13,987 <span><i class="ri-checkbox-circle-line text-success ms-1"></i></span></p>
-                                                                 <p class="mb-0 fs-13">TXN-341220</p>
-                                                            </div>
-                                                       </div>
-                                                       <div class="d-flex align-items-center gap-3 mt-3 border p-2 rounded">
-                                                            <div class="avatar bg-primary bg-opacity-10 rounded">
-                                                                 <iconify-icon icon="solar:square-transfer-horizontal-bold" class="fs-28 text-primary avatar-title"></iconify-icon>
-                                                            </div>
-                                                            <div>
-                                                                 <p class="mb-1 text-dark fw-medium fs-15">Theresa T. Brose</p>
-                                                                 <p class="text-muted mb-0">theresbrosea@dayrep.com</p>
-                                                            </div>
-                                                            <div class="ms-auto">
-                                                                 <p class="mb-1 fs-16 text-dark fw-medium">$2,710 <span><i class="ri-checkbox-circle-line text-success ms-1"></i></span></p>
-                                                                 <p class="mb-0 fs-13">TXN-836451</p>
-                                                            </div>
-                                                       </div>
+                         <div class="modal-body">
+                         <div class="p-3 bg-primary rounded text-white mb-4">
+                         <h4 id="modalCardTransactionId" class="mb-3"></h4>
 
-                                                  </div>
-                                             </div>
-                                             <div class="card-footer border-top px-1">
-                                                  <div class="d-flex align-items-center justify-content-between">
-                                                       <div>
-                                                            <p class="mb-0 fs-15">Total Amount</p>
-                                                       </div>
-                                                       <div>
-                                                            <p class="mb-0 text-primary fw-semibold fs-16">$16,697</p>
-                                                       </div>
-                                                  </div>
-                                             </div>
-                                        </div>
-                                   </div>
+                         <div class="d-flex justify-content-between">
+                              <div>
+                              <small>Payment Source</small>
+                              <div id="modalHolderName" class="fw-semibold"></div>
+                              </div>
+                              <div>
+                              <small>Date</small>
+                              <div id="modalTransactionDate" class="fw-semibold"></div>
                               </div>
                          </div>
+                         </div>
+
+                         <div class="border rounded p-3 text-end">
+                         <div id="modalTransactionAmount" class="fs-4 fw-bold"></div>
+                         <div class="mt-2">
+                              <span id="modalTransactionStatus" class="badge"></span>
+                         </div>
+                         </div>
+                         </div>
+
+                         <div class="modal-footer justify-content-between">
+                         <strong>Total Amount</strong>
+                         <strong id="modalTotalAmount"></strong>
+                         </div>
                     </div>
+                    </div>
+               </div>
 
                </div>
                <!-- End Container Fluid -->
@@ -590,3 +212,45 @@
 
 
 {% endblock %}
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document
+      .querySelectorAll('[data-bs-target="#TransactionsViewModal"]')
+      .forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          const id = this.getAttribute("data-id");
+          const date = this.getAttribute("data-date");
+          const amount = this.getAttribute("data-amount");
+          const source = this.getAttribute("data-source");
+          const status = this.getAttribute("data-status");
+
+          document.getElementById("modalTransactionId").textContent = id;
+          document.getElementById("modalCardTransactionId").textContent =
+            "TXN-" + id;
+          document.getElementById("modalHolderName").textContent =
+            source === "card" ? "Kart ilə ödəniş" : "Balansdan ödəniş";
+          document.getElementById("modalTransactionDate").textContent = date;
+          document.getElementById("modalTransactionAmount").textContent =
+            amount + " AZN";
+          document.getElementById("modalTotalAmount").textContent =
+            amount + " AZN";
+
+          const badge = document.getElementById("modalTransactionStatus");
+          badge.className = "badge";
+          if (status === "paid") {
+            badge.classList.add("bg-success");
+            badge.textContent = "Ödənmiş";
+          } else if (status === "pending") {
+            badge.classList.add("bg-warning", "text-dark");
+            badge.textContent = "Gözləyir";
+          } else {
+            badge.classList.add("bg-danger");
+            badge.textContent = "Uğursuz";
+          }
+        });
+      });
+  });
+</script>

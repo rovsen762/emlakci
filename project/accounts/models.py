@@ -63,7 +63,6 @@ class Account(AbstractUser):
         verbose_name_plural = "Accounts"
         
         
-        
 class AccountCustomers(models.Model):
     class GenderChoices(models.TextChoices):
         MALE = "male", "Male"
@@ -188,7 +187,21 @@ class Subscription(models.Model):
         verbose_name_plural = "Subscriptions"
         
         
-        
+# class Saved(models.Model):
+#     account = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="saveds", verbose_name="Account")
+#     property = models.ForeignKey("properties.Property",on_delete=models.SET_NULL,null=True,blank=True,related_name="saveds",verbose_name="Property")
+#     created_at = models.DateTimeField(auto_now_add=True,verbose_name="Saved Date")
+#     updated_at = models.DateTimeField(auto_now=True,verbose_name="Updated Date")
+
+#     class Meta:
+#         ordering = ['-created_at']
+#         verbose_name = "Saved"
+#         verbose_name_plural = "Saveds"
+
+    
+#     def __str__(self):
+#         return self.account.username
+      
         
 class Balance(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="balance")
@@ -230,11 +243,21 @@ class AccountPayments(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_date = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=255, blank=True, null=True)
+    promocode = models.ForeignKey("PromoCodes", on_delete=models.SET_NULL, null=True, blank=True, related_name="payments", verbose_name="Applied Promo Code")
     
     
     @property
     def get_payment_type_display(self):
         return dict(self.PAYMENT_SOURCE_CHOICES).get(self.payment_source, self.payment_source)
+    
+    def get_discount_amount(self):
+        if self.promocode and self.promocode.is_active:
+            return (self.amount * self.promocode.discount_percentage) / 100
+        return 0
+    
+    @property
+    def get_total_amount(self):
+        return self.amount - self.get_discount_amount()
     
     class Meta:
         ordering = ['-payment_date']
@@ -243,4 +266,22 @@ class AccountPayments(models.Model):
     
     def __str__(self):
         return f"{self.account.username} - Payment: {self.amount} on {self.payment_date.strftime('%Y-%m-%d %H:%M:%S')}" 
+
+
+
+class PromoCodes(models.Model):
+    code = models.CharField(max_length=10, unique=True)
+    is_active = models.BooleanField(default=True)
+    discount_percentage = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Promo Code"
+        verbose_name_plural = "Promo Codes"
+        
+    def __str__(self):
+        return f"{self.code} ({self.discount_percentage}% discount)"
+    
+    
 
